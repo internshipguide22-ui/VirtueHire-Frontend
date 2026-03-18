@@ -1,0 +1,299 @@
+/* ── Root container ── */
+.hcd-container {
+  padding: 40px 40px 80px;
+  max-width: 1100px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background-color: #f8fafc;
+  position: relative;
+}
+
+/* ── Header ── */
+.hcd-header {
+  margin-bottom: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hcd-header h2 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+/* ── Info card ── */
+.hcd-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  padding: 28px 32px;
+  margin-bottom: 24px;
+  border: 1px solid #f1f5f9;
+}
+
+.hcd-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.hcd-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hcd-info-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #94a3b8;
+  letter-spacing: 0.07em;
+  display: flex;
+  align-items: center;
+}
+
+.hcd-info-value {
+  font-size: 15px;
+  color: #1e293b;
+  font-weight: 500;
+  word-break: break-word;
+}
+
+/* ── Badge ── */
+.hcd-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 16px;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+  border-radius: 99px;
+  font-weight: 600;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+/* ── Section title (History by Subject) ── */
+.hcd-section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* ── Subject cards ── */
+.hcd-subject-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: 1px solid #f1f5f9;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.hcd-subject-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 24px;
+  border-bottom: 1px solid #f1f5f9;
+  background: #fafbfc;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.hcd-subject-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #eff6ff;
+  color: #3b82f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.hcd-subject-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+/* ── Level rows ── */
+.hcd-levels-list {
+  padding: 4px 0;
+}
+
+.hcd-level-row {
+  display: grid;
+  grid-template-columns: 200px 1fr auto;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 24px;
+  border-bottom: 1px solid #f8fafc;
+  transition: background 0.15s;
+}
+
+.hcd-level-row:last-child {
+  border-bottom: none;
+}
+
+.hcd-level-row:hover {
+  background: #f9fafb;
+}
+
+.hcd-level-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.hcd-level-badge {
+  background: #eff6ff;
+  color: #2563eb;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 5px;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.hcd-level-bar-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hcd-level-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+/* ── Progress bars ── */
+.hcd-progress-bar-bg {
+  height: 8px;
+  background: #f1f5f9;
+  border-radius: 4px;
+  overflow: hidden;
+  flex: 1;
+}
+
+.hcd-progress-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+
+/* ── Status badges ── */
+.hcd-status-badge {
+  padding: 5px 12px;
+  border-radius: 7px;
+  font-weight: 600;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.hcd-status-passed {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.hcd-status-failed {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* ── Back button ── */
+.hcd-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: white;
+  color: #1e293b;
+  border: 1px solid #e2e8f0;
+  padding: 9px 18px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.hcd-back-btn:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+/* ── Scroll to top button ── */
+.hcd-scroll-top {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+  transition: all 0.2s;
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.hcd-scroll-top.hcd-scroll-top--visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.hcd-scroll-top:hover {
+  background: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.5);
+}
+
+/* ── Responsive for smaller screens ── */
+@media (max-width: 768px) {
+  .hcd-container {
+    padding: 20px 16px 80px;
+  }
+
+  .hcd-level-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 16px;
+  }
+
+  .hcd-level-meta {
+    justify-content: flex-start;
+  }
+
+  .hcd-subject-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

@@ -1,0 +1,433 @@
+/* AdminDashboard.css */
+:root {
+    --adm-bg: #f8fafc;
+    --adm-sidebar: #0f172a;
+    --adm-primary: #3b82f6;
+    --adm-text-main: #1e293b;
+    --adm-text-sub: #64748b;
+    --adm-border: #e2e8f0;
+}
+
+.adm-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--adm-bg);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Sidebar */
+.adm-sidebar {
+    width: 260px;
+    background-color: var(--adm-sidebar);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100vh;
+    z-index: 100;
+}
+
+.adm-logo {
+    padding: 2rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+}
+
+.adm-logo-icon {
+    color: var(--adm-primary);
+}
+
+.adm-side-nav {
+    flex: 1;
+    padding: 0 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.adm-side-nav a {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    color: #94a3b8;
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    transition: all 0.2s;
+}
+
+.adm-side-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: white;
+}
+
+.adm-side-nav a.active {
+    background-color: var(--adm-primary);
+    color: white;
+}
+
+.adm-sidebar-footer {
+    padding: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.adm-user-pill {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.adm-user-avatar {
+    width: 32px;
+    height: 32px;
+    background-color: var(--adm-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.adm-username {
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.adm-role {
+    font-size: 0.75rem;
+    color: #64748b;
+}
+
+/* Main Content */
+.adm-main {
+    margin-left: 260px;
+    flex: 1;
+    padding: 2.5rem;
+}
+
+.adm-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2.5rem;
+}
+
+.adm-header-title h1 {
+    font-size: 1.875rem;
+    font-weight: 800;
+    color: var(--adm-text-main);
+    margin-bottom: 0.5rem;
+}
+
+.adm-header-title p {
+    color: var(--adm-text-sub);
+}
+
+.adm-refresh-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--adm-border);
+    background: white;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--adm-text-sub);
+    transition: all 0.2s;
+}
+
+.adm-refresh-btn:hover {
+    background: #f1f5f9;
+    color: var(--adm-text-main);
+}
+
+/* Stats Cards */
+.adm-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.adm-stat-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 4px solid transparent;
+}
+
+.adm-stat-card.blue {
+    border-color: #3b82f6;
+}
+
+.adm-stat-card.green {
+    border-color: #10b981;
+}
+
+.adm-stat-card.yellow {
+    border-color: #f59e0b;
+}
+
+.adm-stat-card.purple {
+    border-color: #8b5cf6;
+}
+
+.adm-stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.blue .adm-stat-icon {
+    background: #eff6ff;
+    color: #3b82f6;
+}
+
+.green .adm-stat-icon {
+    background: #ecfdf5;
+    color: #10b981;
+}
+
+.yellow .adm-stat-icon {
+    background: #fffbe6;
+    color: #f59e0b;
+}
+
+.purple .adm-stat-icon {
+    background: #f5f3ff;
+    color: #8b5cf6;
+}
+
+.adm-stat-value {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--adm-text-main);
+}
+
+.adm-stat-label {
+    font-size: 0.875rem;
+    color: var(--adm-text-sub);
+    font-weight: 500;
+}
+
+/* Dashboard Grid */
+.adm-dashboard-grid {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 1.5rem;
+}
+
+.adm-card {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+}
+
+.adm-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.adm-card-header h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--adm-text-main);
+}
+
+.adm-badge {
+    background: #f1f5f9;
+    color: #475569;
+    padding: 0.25rem 0.6rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* Queue Items */
+.adm-queue-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.adm-queue-item:last-child {
+    border-bottom: none;
+}
+
+.adm-queue-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.adm-queue-icon.yellow {
+    background: #fffbeb;
+    color: #f59e0b;
+}
+
+.adm-queue-icon.red {
+    background: #fef2f2;
+    color: #ef4444;
+}
+
+.adm-queue-details {
+    flex: 1;
+}
+
+.adm-queue-text {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--adm-text-main);
+}
+
+.adm-queue-sub {
+    font-size: 0.75rem;
+    color: var(--adm-text-sub);
+}
+
+.adm-action-link {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--adm-primary);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+/* Payment Items */
+.adm-payment-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.adm-pay-hr {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--adm-text-main);
+}
+
+.adm-pay-meta {
+    font-size: 0.75rem;
+    color: var(--adm-text-sub);
+}
+
+.adm-pay-amount {
+    font-weight: 700;
+    color: #10b981;
+}
+
+/* Table Styling */
+.adm-table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    text-align: left;
+    padding: 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--adm-text-sub);
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--adm-border);
+}
+
+td {
+    padding: 1rem 0.75rem;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: middle;
+}
+
+.adm-t-name {
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.adm-t-email {
+    font-size: 0.75rem;
+    color: var(--adm-text-sub);
+}
+
+.adm-t-score {
+    font-weight: 700;
+    color: var(--adm-primary);
+}
+
+.adm-t-badge {
+    background: #dcfce7;
+    color: #166534;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+}
+
+.adm-t-btn {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--adm-primary);
+    text-decoration: none;
+    border: 1px solid #dbeafe;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+}
+
+.mt-6 {
+    margin-top: 1.5rem;
+}
+
+/* Loading State */
+.adm-loading-screen {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--adm-bg);
+    color: var(--adm-text-sub);
+}
+
+.adm-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #e2e8f0;
+    border-top-color: var(--adm-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

@@ -1,0 +1,72 @@
+/* src/components/Candidate/CandidateRegister.css */
+
+.register-body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f7f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.register-form {
+  background-color: #ffffff;
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 400px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+p a {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  color: #4caf50;
+  text-decoration: none;
+}
+
+p a:hover {
+  text-decoration: underline;
+}
+
+.success-msg {
+  color: green;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.error-msg {
+  color: red;
+  text-align: center;
+  margin-bottom: 15px;
+}
