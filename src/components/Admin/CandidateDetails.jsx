@@ -1,7 +1,7 @@
 // src/pages/admin/CandidateDetails.jsx
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import axios from "axios";
+import api from "../../services/api";
 
 const CandidateDetails = () => {
   const { id } = useParams();
@@ -12,8 +12,8 @@ const CandidateDetails = () => {
 
   useEffect(() => {
     // Fetch candidate details
-    axios
-      .get(`http://localhost:8081/api/admin/candidates/${id}`, { withCredentials: true })
+    api
+      .get(`/admin/candidates/${id}`)
       .then((res) => {
         setCandidate(res.data.candidate || null);
         setResults(Array.isArray(res.data.results) ? res.data.results : []);
@@ -202,7 +202,7 @@ const CandidateDetails = () => {
             <>
               <p><strong>Resume File:</strong> {candidate.resumePath}</p>
               <a
-                href={`/candidates/file/${candidate.resumePath}`}
+                href={`https://backend.virtuehire.in/api/candidates/file/${candidate.resumePath}`}
                 className="btn btn-sm btn-outline-primary"
               >
                 <i className="fas fa-download"></i> Download Resume

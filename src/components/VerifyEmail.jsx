@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../services/api';
 import { Mail, CheckCircle, AlertCircle, ShieldCheck, ArrowRight } from 'lucide-react';
 import './VerifyEmail.css';
 
@@ -30,8 +30,8 @@ export default function VerifyEmail() {
         setStatus({ type: '', msg: '' });
 
         try {
-            const endpoint = role.toLowerCase() === 'hr' ? '/api/hrs/verify-email' : '/api/candidates/verify-email';
-            const response = await axios.post(`http://localhost:8081${endpoint}`, { email, code });
+            const endpoint = role.toLowerCase() === 'hr' ? '/hrs/verify-email' : '/candidates/verify-email';
+            const response = await api.post(endpoint, { email, code });
 
             setStatus({ type: 'success', msg: response.data.message });
 

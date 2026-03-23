@@ -18,7 +18,7 @@
 
 //   const fetchPayments = async () => {
 //     try {
-//       const res = await axios.get("http://localhost:8081/admin/payments"); // Adjust URL
+//       const res = await axios.get("https://backend.virtuehire.in/admin/payments"); // Adjust URL
 //       const data = res.data;
 
 //       setPayments(data);
@@ -161,7 +161,7 @@
 // src/pages/admin/PaymentsList.jsx
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import api from "../../services/api";
 
 const PaymentsList = () => {
   const [payments, setPayments] = useState([]);
@@ -174,8 +174,8 @@ const PaymentsList = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8081/api/admin/payments", { withCredentials: true })
+    api
+      .get("/admin/payments")
       .then((res) => {
         const data = res.data.payments || [];
         const totalPayments = data.length;

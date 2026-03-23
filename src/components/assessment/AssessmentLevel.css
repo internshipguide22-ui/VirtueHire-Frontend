@@ -182,17 +182,18 @@ span[style*="color: red"] {
 /* ========== Buttons ========== */
 button {
   background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%) !important;
-  color: white !important;
+  color: #ffffff !important;
   border: none !important;
-  padding: 14px 32px !important;
+  padding: 12px 28px !important;
   font-size: 1rem !important;
   font-weight: 700 !important;
   border-radius: 10px !important;
   cursor: pointer !important;
   transition: all 0.3s ease !important;
-  display: block !important;
-  margin: 24px auto 0 auto !important;
+  display: inline-block !important; /* Changed from block to inline-block for side-by-side */
+  margin: 10px !important;
   box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3) !important;
+  text-transform: none !important;
 }
 
 button:hover:not(:disabled) {
@@ -201,12 +202,10 @@ button:hover:not(:disabled) {
   transform: translateY(-2px) !important;
 }
 
-button:active:not(:disabled) {
-  transform: translateY(0) !important;
-}
-
 button:disabled {
-  opacity: 0.6 !important;
+  background: #e2e8f0 !important;
+  color: #94a3b8 !important;
+  box-shadow: none !important;
   cursor: not-allowed !important;
 }
 

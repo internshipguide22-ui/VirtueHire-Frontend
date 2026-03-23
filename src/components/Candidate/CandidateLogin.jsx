@@ -312,7 +312,7 @@
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../../services/api"; // Axios instance with baseURL http://localhost:8081/api
+import api from "../../services/api"; // Axios instance with baseURL https://backend.virtuehire.in/api
 
 
 function CandidateLogin() {

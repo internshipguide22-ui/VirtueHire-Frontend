@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-import { 
-  Users, 
-  Search, 
-  Filter, 
-  Download, 
-  Eye, 
-  Shield, 
-  Briefcase, 
-  HelpCircle, 
-  CreditCard, 
+import api from '../../services/api';
+import {
+  Users,
+  Search,
+  Filter,
+  Download,
+  Eye,
+  Shield,
+  Briefcase,
+  HelpCircle,
+  CreditCard,
   TrendingUp,
   Mail,
   Phone,
@@ -34,7 +34,7 @@ export default function CandidatesList() {
     experienced: 0
   });
 
-  const API_BASE = 'http://localhost:8081/api/admin/candidates';
+  const API_BASE = '/admin/candidates';
 
   useEffect(() => {
     fetchCandidates();
@@ -43,10 +43,10 @@ export default function CandidatesList() {
   const fetchCandidates = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(API_BASE);
+      const res = await api.get(API_BASE);
       const list = res.data.candidates || [];
       setCandidates(list);
-      
+
       // Calculate stats
       setStats({
         total: list.length,
@@ -62,9 +62,9 @@ export default function CandidatesList() {
   };
 
   const filteredCandidates = candidates.filter(c => {
-    const matchesSearch = c.fullName?.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                         c.email?.toLowerCase().includes(searchTerm.toLowerCase());
-    
+    const matchesSearch = c.fullName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      c.email?.toLowerCase().includes(searchTerm.toLowerCase());
+
     if (filter === 'assessed') return matchesSearch && c.assessmentTaken;
     if (filter === 'fresher') return matchesSearch && c.experienceLevel === 'Fresher';
     if (filter === 'experienced') return matchesSearch && c.experienceLevel !== 'Fresher';
@@ -171,9 +171,9 @@ export default function CandidatesList() {
           <div style={{ display: 'flex', gap: '20px', alignItems: 'center', flexWrap: 'wrap' }}>
             <div style={{ flex: 1, position: 'relative', minWidth: '300px' }}>
               <Search style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }} size={18} />
-              <input 
-                type="text" 
-                placeholder="Search candidates by name or email..." 
+              <input
+                type="text"
+                placeholder="Search candidates by name or email..."
                 className="adm-input"
                 style={{ paddingLeft: '40px', width: '100%', borderRadius: '8px', border: '1px solid #e2e8f0', height: '42px' }}
                 value={searchTerm}
@@ -181,19 +181,19 @@ export default function CandidatesList() {
               />
             </div>
             <div style={{ display: 'flex', gap: '8px' }}>
-              <button 
+              <button
                 className={`adm-filter-pill ${filter === 'all' ? 'active' : ''}`}
                 onClick={() => setFilter('all')}
               >All</button>
-              <button 
+              <button
                 className={`adm-filter-pill ${filter === 'assessed' ? 'active' : ''}`}
                 onClick={() => setFilter('assessed')}
               >Assessed</button>
-              <button 
+              <button
                 className={`adm-filter-pill ${filter === 'fresher' ? 'active' : ''}`}
                 onClick={() => setFilter('fresher')}
               >Freshers</button>
-              <button 
+              <button
                 className={`adm-filter-pill ${filter === 'experienced' ? 'active' : ''}`}
                 onClick={() => setFilter('experienced')}
               >Experienced</button>
@@ -246,8 +246,8 @@ export default function CandidatesList() {
                             <Eye size={16} />
                           </Link>
                           {c.resumePath && (
-                            <a 
-                              href={`http://localhost:8081/api/admin/download/resume/${c.id}`}
+                            <a
+                              href={`https://backend.virtuehire.in/api/admin/download/resume/${c.id}`}
                               className="adm-t-btn secondary"
                               title="Download Resume"
                               download
@@ -264,7 +264,7 @@ export default function CandidatesList() {
                     <td colSpan="5" style={{ textAlign: 'center', padding: '60px 0', color: '#64748b' }}>
                       <Users size={48} style={{ opacity: 0.2, marginBottom: '16px' }} />
                       <p>No candidates found matching your criteria.</p>
-                      <button onClick={() => {setSearchTerm(''); setFilter('all');}} className="adm-t-btn" style={{ marginTop: '12px' }}>
+                      <button onClick={() => { setSearchTerm(''); setFilter('all'); }} className="adm-t-btn" style={{ marginTop: '12px' }}>
                         Clear all filters
                       </button>
                     </td>
@@ -276,7 +276,8 @@ export default function CandidatesList() {
         </div>
       </main>
 
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         .adm-filter-pill {
           padding: 8px 16px;
           border-radius: 20px;

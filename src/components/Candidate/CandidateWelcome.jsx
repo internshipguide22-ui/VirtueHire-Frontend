@@ -659,7 +659,7 @@
 
 //     // Set profile image
 //    if (parsedCandidate.profilePic) {
-//     setProfileSrc(`http://localhost:8081/uploads/${parsedCandidate.profilePic}`);
+//     setProfileSrc(`https://backend.virtuehire.in/uploads/${parsedCandidate.profilePic}`);
 // }
 
 //     // Fetch assessment results including badge
@@ -851,7 +851,7 @@
 
 //     // Set profile image
 //     if (parsedCandidate.profilePic) {
-//       setProfileSrc(`http://localhost:8081/uploads/${parsedCandidate.profilePic}`);
+//       setProfileSrc(`https://backend.virtuehire.in/uploads/${parsedCandidate.profilePic}`);
 //     }
 
 //     // ✅ Always fetch latest assessment data to refresh badge
@@ -1020,7 +1020,7 @@
 
 //     // Set profile image
 //     if (parsedCandidate.profilePic) {
-//       setProfileSrc(`http://localhost:8081/uploads/${parsedCandidate.profilePic}`);
+//       setProfileSrc(`https://backend.virtuehire.in/uploads/${parsedCandidate.profilePic}`);
 //     }
 
 //     // ✅ Always fetch latest assessment data to refresh badge
@@ -1194,7 +1194,7 @@
 //     setFormData(parsedCandidate);
 
 //     if (parsedCandidate.profilePic) {
-//       setProfileSrc(`http://localhost:8081/uploads/${parsedCandidate.profilePic}`);
+//       setProfileSrc(`https://backend.virtuehire.in/uploads/${parsedCandidate.profilePic}`);
 //     }
 
 //     fetchAssessmentData(parsedCandidate.id);
@@ -1423,7 +1423,7 @@
 //     setFormData(parsedCandidate);
 
 //     if (parsedCandidate.profilePic) {
-//       setProfileSrc(`http://localhost:8081/uploads/${parsedCandidate.profilePic}`);
+//       setProfileSrc(`https://backend.virtuehire.in/uploads/${parsedCandidate.profilePic}`);
 //     }
 
 //     fetchAssessmentData(parsedCandidate.id);
@@ -1718,7 +1718,7 @@
 //     setFormData(parsedCandidate);
 
 //     if (parsedCandidate.profilePic) {
-//       setProfileSrc(`http://localhost:8081/uploads/${parsedCandidate.profilePic}`);
+//       setProfileSrc(`https://backend.virtuehire.in/uploads/${parsedCandidate.profilePic}`);
 //     }
 
 //     fetchAssessmentData(parsedCandidate.id);
@@ -2002,7 +2002,7 @@
 //     setFormData(parsedCandidate);
 
 //     if (parsedCandidate.profilePic) {
-//       setProfileSrc(`http://localhost:8081/uploads/${parsedCandidate.profilePic}`);
+//       setProfileSrc(`https://backend.virtuehire.in/uploads/${parsedCandidate.profilePic}`);
 //     }
 
 //     fetchAssessmentData(parsedCandidate.id);
@@ -2278,7 +2278,7 @@
 //       setFormData(parsedCandidate);
 
 //       if (parsedCandidate.profilePic) {
-//         setProfileSrc(`http://localhost:8081/uploads/${parsedCandidate.profilePic}`);
+//         setProfileSrc(`https://backend.virtuehire.in/uploads/${parsedCandidate.profilePic}`);
 //       }
 
 //       fetchAssessmentData(parsedCandidate.id);
@@ -2419,7 +2419,7 @@
 //             </button>
 //           )}
 
-         
+
 
 //           {/* Take Assessment Button */}
 //           <div style={{ textAlign: "center", marginTop: "25px" }}>
@@ -2543,7 +2543,7 @@
 //     setFormData(parsedCandidate);
 
 //     if (parsedCandidate.profilePic) {
-//       setProfileSrc(`http://localhost:8081/api/candidates/file/${parsedCandidate.profilePic}`);
+//       setProfileSrc(`https://backend.virtuehire.in/api/candidates/file/${parsedCandidate.profilePic}`);
 //     }
 
 //     fetchAssessmentData(parsedCandidate.id);
@@ -2774,7 +2774,7 @@
 //     setCandidate(parsedCandidate);
 
 //     if (parsedCandidate.profilePic) {
-//       setProfileSrc(`http://localhost:8081/api/candidates/file/${parsedCandidate.profilePic}`);
+//       setProfileSrc(`https://backend.virtuehire.in/api/candidates/file/${parsedCandidate.profilePic}`);
 //     }
 
 //     fetchCumulativeResults(parsedCandidate.id);
@@ -2938,7 +2938,7 @@
 //     setCandidate(parsedCandidate);
 
 //     if (parsedCandidate.profilePic) {
-//       setProfileSrc(`http://localhost:8081/api/candidates/file/${parsedCandidate.profilePic}`);
+//       setProfileSrc(`https://backend.virtuehire.in/api/candidates/file/${parsedCandidate.profilePic}`);
 //     }
 
 //     fetchCumulativeResults(parsedCandidate.id);
@@ -3106,7 +3106,7 @@
 //     setCandidate(parsedCandidate);
 
 //     if (parsedCandidate.profilePic) {
-//       setProfileSrc(`http://localhost:8081/api/candidates/file/${parsedCandidate.profilePic}`);
+//       setProfileSrc(`https://backend.virtuehire.in/api/candidates/file/${parsedCandidate.profilePic}`);
 //     }
 
 //     fetchCumulativeResults(parsedCandidate.id);
@@ -3278,7 +3278,7 @@ export default function CandidateWelcome() {
     setCandidate(parsedCandidate);
 
     if (parsedCandidate.profilePic) {
-      setProfileSrc(`http://localhost:8081/api/candidates/file/${parsedCandidate.profilePic}`);
+      setProfileSrc(`https://backend.virtuehire.in/api/candidates/file/${parsedCandidate.profilePic}`);
     }
 
     fetchCumulativeResults(parsedCandidate.id);
@@ -3346,7 +3346,7 @@ export default function CandidateWelcome() {
           background: "rgba(255, 255, 255, 0.1)",
           borderRadius: "50%"
         }} />
-        
+
         <div style={{
           maxWidth: "1200px",
           margin: "0 auto",
@@ -3354,16 +3354,16 @@ export default function CandidateWelcome() {
           zIndex: 1,
           textAlign: "center"
         }}>
-          <h1 style={{ 
-            color: "#ffffff", 
-            fontSize: "2.8rem", 
+          <h1 style={{
+            color: "#ffffff",
+            fontSize: "2.8rem",
             fontWeight: "800",
             marginBottom: "10px",
             margin: "0 0 10px 0"
           }}>
             👋 Welcome back, {candidate.fullName}!
           </h1>
-          <p style={{ 
+          <p style={{
             color: "rgba(255, 255, 255, 0.9)",
             fontSize: "1.1rem",
             fontWeight: "500",
@@ -3376,7 +3376,7 @@ export default function CandidateWelcome() {
 
       {/* Main Content */}
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 20px" }}>
-        
+
         {/* Profile Card */}
         <div style={{
           backgroundColor: "#ffffff",
@@ -3404,9 +3404,9 @@ export default function CandidateWelcome() {
               <img
                 src={profileSrc}
                 alt="Profile"
-                style={{ 
-                  width: "100%", 
-                  height: "100%", 
+                style={{
+                  width: "100%",
+                  height: "100%",
                   objectFit: "cover"
                 }}
                 onError={() => setProfileSrc("/images/default-profile.png")}
@@ -3417,7 +3417,7 @@ export default function CandidateWelcome() {
           {/* Profile Info */}
           <div>
             <h2 style={{ color: "#1f2937", fontSize: "1.5rem", fontWeight: "700", marginBottom: "20px" }}>Profile Information</h2>
-            
+
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px", marginBottom: "20px" }}>
               <div>
                 <p style={{ color: "#6b7280", fontSize: "0.9rem", fontWeight: "600", marginBottom: "4px" }}>EMAIL</p>
@@ -3480,14 +3480,14 @@ export default function CandidateWelcome() {
               transition: "all 0.3s ease",
               cursor: "pointer"
             }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.transform = "translateY(-4px)";
-              e.currentTarget.style.boxShadow = "0 8px 16px rgba(79, 70, 229, 0.15)";
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow = "0 2px 8px rgba(0, 0, 0, 0.06)";
-            }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.transform = "translateY(-4px)";
+                e.currentTarget.style.boxShadow = "0 8px 16px rgba(79, 70, 229, 0.15)";
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "0 2px 8px rgba(0, 0, 0, 0.06)";
+              }}
             >
               <div style={{ fontSize: "2rem", marginBottom: "8px" }}>{stat.icon}</div>
               <p style={{ color: "#6b7280", fontSize: "0.9rem", fontWeight: "600", margin: "0 0 8px 0" }}>{stat.label}</p>
@@ -3534,10 +3534,10 @@ export default function CandidateWelcome() {
             boxShadow: "0 4px 16px rgba(0, 0, 0, 0.08)",
             marginBottom: "40px"
           }}>
-            <h3 style={{ 
-              color: "#1f2937", 
-              fontSize: "1.8rem", 
-              fontWeight: "700", 
+            <h3 style={{
+              color: "#1f2937",
+              fontSize: "1.8rem",
+              fontWeight: "700",
               marginBottom: "30px",
               display: "flex",
               alignItems: "center",

@@ -1,6 +1,6 @@
 // src/pages/admin/QuestionManagement.jsx
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../../services/api";
 
 const QuestionManagement = () => {
   const [questions, setQuestions] = useState([]);
@@ -27,8 +27,8 @@ const QuestionManagement = () => {
   // Fetch questions & subjects
   useEffect(() => {
     setLoading(true);
-    axios
-      .get("http://localhost:8081/api/admin/questions", { withCredentials: true })
+    api
+      .get("/admin/questions")
       .then((res) => {
         setQuestions(res.data.questions || []);
         setSubjects(res.data.subjects || []);
@@ -61,8 +61,8 @@ const QuestionManagement = () => {
   // Add new question
   const handleAddQuestion = (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:8081/api/admin/questions/add", newQuestion, { withCredentials: true })
+    api
+      .post("/admin/questions/add", newQuestion)
       .then((res) => {
         setQuestions((prev) => [...prev, res.data]);
         setNewQuestion({
@@ -79,8 +79,8 @@ const QuestionManagement = () => {
   // Delete question
   const handleDelete = (id) => {
     if (!window.confirm("Are you sure you want to delete this question?")) return;
-    axios
-      .post(`http://localhost:8081/api/admin/questions/delete/${id}`, {}, { withCredentials: true })
+    api
+      .post(`/admin/questions/delete/${id}`, {})
       .then(() => setQuestions((prev) => prev.filter((q) => q.id !== id)))
       .catch((err) => console.error(err));
   };
@@ -97,9 +97,8 @@ const QuestionManagement = () => {
     formData.append("testName", testTitle);
 
     setSaveLoading(true);
-    axios
-      .post("http://localhost:8081/api/admin/questions/upload", formData, {
-        withCredentials: true,
+    api
+      .post("/admin/questions/upload", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       })
       .then((res) => {
@@ -124,8 +123,8 @@ const QuestionManagement = () => {
     const configData = sections.map(s => ({ ...s, subject: testTitle }));
 
     setSaveLoading(true);
-    axios
-      .post("http://localhost:8081/api/admin/assessment/config", configData, { withCredentials: true })
+    api
+      .post("/admin/assessment/config", configData)
       .then((res) => {
         alert("Assessment configuration saved!");
       })

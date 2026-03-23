@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import axios from "axios";
+import api from "../../services/api";
 
 const PaymentDetails = () => {
   const { id } = useParams();
@@ -9,8 +9,8 @@ const PaymentDetails = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:8081/api/admin/payments/${id}`, { withCredentials: true })
+    api
+      .get(`/admin/payments/${id}`)
       .then((res) => {
         setPayment(res.data);
         setLoading(false);

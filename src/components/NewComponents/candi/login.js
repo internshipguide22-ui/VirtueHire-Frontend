@@ -28,7 +28,7 @@ function Login() {
       formData.append("email", email);
       formData.append("password", password);
 
-      const res = await fetch("http://localhost:8081/candidates/login", {
+      const res = await fetch("https://backend.virtuehire.in/candidates/login", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: formData
@@ -308,7 +308,7 @@ function Login() {
         <p style={subtitleStyle}>
           Empowering Talent, Enabling Success
         </p>
-        
+
         <div>
           <div style={featureItemStyle}>
             <div style={checkmarkStyle}>✓</div>
@@ -316,14 +316,14 @@ function Login() {
               <h3 style={featureTitleStyle}>Smart Recruitment Solutions</h3>
             </div>
           </div>
-          
+
           <div style={featureItemStyle}>
             <div style={checkmarkStyle}>✓</div>
             <div>
               <h3 style={featureTitleStyle}>AI-Powered Matching</h3>
             </div>
           </div>
-          
+
           <div style={featureItemStyle}>
             <div style={checkmarkStyle}>✓</div>
             <div>
@@ -335,7 +335,7 @@ function Login() {
 
       {/* Right Side - Login Card */}
       <div style={cardStyle}>
-        <button 
+        <button
           style={backButtonStyle}
           onClick={() => navigate('/landing')}
           onMouseOver={(e) => e.currentTarget.style.background = '#f9fafb'}
@@ -417,7 +417,7 @@ function Login() {
               />
               <span>Remember me</span>
             </label>
-            <span 
+            <span
               style={forgotLinkStyle}
               onClick={() => navigate('/forgot-password')}
             >
@@ -440,7 +440,7 @@ function Login() {
         {/* Register Link */}
         <div style={registerTextStyle}>
           Don't have an account?
-          <span 
+          <span
             style={registerLinkStyle}
             onClick={() => navigate('/candidate-registration')}
           >

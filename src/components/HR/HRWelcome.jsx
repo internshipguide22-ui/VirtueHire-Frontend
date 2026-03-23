@@ -11,7 +11,7 @@
 //   useEffect(() => {
 //     // Fetch HR info from backend
 //     axios
-//       .get("http://localhost:8081/api/hrs/dashboard", { withCredentials: true })
+//       .get("https://backend.virtuehire.in/api/hrs/dashboard", { withCredentials: true })
 //       .then((res) => {
 //         setHr(res.data.hr);
 //       })
@@ -27,7 +27,7 @@
 
 //   const handleLogout = () => {
 //     axios
-//       .get("http://localhost:8081/api/hrs/logout", { withCredentials: true })
+//       .get("https://backend.virtuehire.in/api/hrs/logout", { withCredentials: true })
 //       .then(() => {
 //         navigate("/"); // Redirect to landing/login page
 //       })
@@ -112,7 +112,7 @@
 //   useEffect(() => {
 //     // Fetch HR dashboard info from backend
 //     axios
-//       .get("http://localhost:8081/api/hrs/dashboard", { withCredentials: true })
+//       .get("https://backend.virtuehire.in/api/hrs/dashboard", { withCredentials: true })
 //       .then((res) => {
 //         if (res.data.hr) setHr(res.data.hr);
 //         else navigate("/"); // If no HR info, redirect to login
@@ -130,7 +130,7 @@
 
 //   const handleLogout = () => {
 //     axios
-//       .get("http://localhost:8081/api/hrs/logout", { withCredentials: true })
+//       .get("https://backend.virtuehire.in/api/hrs/logout", { withCredentials: true })
 //       .then(() => {
 //         localStorage.removeItem("user"); // Clear localStorage
 //         navigate("/"); // Redirect to login
@@ -227,7 +227,7 @@
 
 //     // 3️⃣ OPTIONAL: verify HR session from backend
 //     axios
-//       .get("http://localhost:8081/api/hrs/dashboard", {
+//       .get("https://backend.virtuehire.in/api/hrs/dashboard", {
 //         withCredentials: true,
 //       })
 //       .then((res) => {
@@ -246,7 +246,7 @@
 
 //   const handleLogout = () => {
 //     axios
-//       .get("http://localhost:8081/api/hrs/logout", {
+//       .get("https://backend.virtuehire.in/api/hrs/logout", {
 //         withCredentials: true,
 //       })
 //       .finally(() => {
@@ -324,12 +324,9 @@
 //   );
 // };
 
-// export default HRWelcome;
-
-
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../../services/api";
 
 const HRWelcome = () => {
   const [hr, setHr] = useState(null);
@@ -338,8 +335,8 @@ const HRWelcome = () => {
 
   useEffect(() => {
     // 1️⃣ Verify session with backend
-    axios
-      .get("http://localhost:8081/api/hrs/dashboard", { withCredentials: true })
+    api
+      .get("/hrs/dashboard")
       .then((res) => {
         if (res.data?.hr) {
           setHr(res.data.hr);
@@ -357,8 +354,8 @@ const HRWelcome = () => {
   };
 
   const handleLogout = () => {
-    axios
-      .get("http://localhost:8081/api/hrs/logout", { withCredentials: true })
+    api
+      .get("/hrs/logout")
       .finally(() => {
         navigate("/login");
       });

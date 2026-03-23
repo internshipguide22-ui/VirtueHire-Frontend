@@ -26,7 +26,7 @@
 
 //   const fetchQuestions = async () => {
 //     try {
-//       const res = await axios.get("http://localhost:8081/admin/questions");
+//       const res = await axios.get("https://backend.virtuehire.in/admin/questions");
 //       setQuestions(res.data);
 //       setLoading(false);
 //     } catch (err) {
@@ -38,7 +38,7 @@
 
 //   const fetchSubjects = async () => {
 //     try {
-//       const res = await axios.get("http://localhost:8081/admin/questions/subjects");
+//       const res = await axios.get("https://backend.virtuehire.in/admin/questions/subjects");
 //       setSubjects(res.data);
 //     } catch (err) {
 //       console.error(err);
@@ -59,7 +59,7 @@
 //   const handleAddQuestion = async (e) => {
 //     e.preventDefault();
 //     try {
-//       await axios.post("http://localhost:8081/admin/questions/add", newQuestion);
+//       await axios.post("https://backend.virtuehire.in/admin/questions/add", newQuestion);
 //       setNewQuestion({
 //         subject: "",
 //         level: 1,
@@ -77,7 +77,7 @@
 //   const handleDelete = async (id) => {
 //     if (!window.confirm("Are you sure you want to delete this question?")) return;
 //     try {
-//       await axios.post(`http://localhost:8081/admin/questions/delete/${id}`);
+//       await axios.post(`https://backend.virtuehire.in/admin/questions/delete/${id}`);
 //       setQuestions(questions.filter(q => q.id !== id));
 //     } catch (err) {
 //       console.error(err);
@@ -88,7 +88,7 @@
 //   const handleFilter = async (e) => {
 //     e.preventDefault();
 //     try {
-//       const res = await axios.get(`http://localhost:8081/admin/questions?subject=${selectedSubject}`);
+//       const res = await axios.get(`https://backend.virtuehire.in/admin/questions?subject=${selectedSubject}`);
 //       setQuestions(res.data);
 //     } catch (err) {
 //       console.error(err);

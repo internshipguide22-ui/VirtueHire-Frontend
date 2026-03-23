@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import api from '../../services/api';
 import {
   Users,
   UserCheck,
@@ -23,7 +23,7 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
 
   // API Base URL - points to Virtue-Candidate backend
-  const API_BASE = 'http://localhost:8081/api/admin';
+  const API_BASE = '/admin';
 
   useEffect(() => {
     fetchDashboard();
@@ -32,7 +32,7 @@ export default function AdminDashboard() {
   const fetchDashboard = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`${API_BASE}/dashboard`);
+      const res = await api.get(`${API_BASE}/dashboard`);
       setData(res.data);
     } catch (e) {
       console.error("Dashboard Fetch Error:", e);

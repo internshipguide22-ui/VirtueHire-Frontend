@@ -159,7 +159,7 @@
 
 //   useEffect(() => {
 //     axios
-//       .get("http://localhost:8081/api/payments/plans", { withCredentials: true })
+//       .get("https://backend.virtuehire.in/api/payments/plans", { withCredentials: true })
 //       .then((res) => {
 //         setHr(res.data.hr);
 //         setMonthlyPrice(res.data.monthlyPrice);
@@ -178,7 +178,7 @@
 //   const handleBuy = async (planType) => {
 //     try {
 //       const res = await axios.post(
-//         "http://localhost:8081/api/payments/process-payment",
+//         "https://backend.virtuehire.in/api/payments/process-payment",
 //         null,
 //         {
 //           params: { planType },

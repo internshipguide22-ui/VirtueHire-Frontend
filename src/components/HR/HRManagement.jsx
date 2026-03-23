@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../../services/api';
 import { Eye, EyeOff, Check, X, User, Shield, Building2, Mail, ExternalLink, RefreshCw } from 'lucide-react';
 import './HRManagement.css'; // I'll create this to house specific styles
 
@@ -14,7 +14,7 @@ export default function HRManagement() {
   const [message, setMessage] = useState({ type: '', text: '' });
 
   // API Base URL - points to Virtue-Candidate backend
-  const API_BASE = 'http://localhost:8081/api/admin/hrs';
+  const API_BASE = '/admin/hrs';
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -26,7 +26,7 @@ export default function HRManagement() {
   const fetchHrs = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(API_BASE);
+      const response = await api.get(API_BASE);
       // Backend returns Map.of("hrs", hrs), so we need response.data.hrs
       setHrs(response.data.hrs || []);
     } catch (err) {
@@ -45,7 +45,7 @@ export default function HRManagement() {
 
   const handleVerify = async (id) => {
     try {
-      await axios.post(`${API_BASE}/verify/${id}`);
+      await api.post(`${API_BASE}/verify/${id}`);
       setHrs(hrs.map(hr => (hr.id === id ? { ...hr, verified: true } : hr)));
       showMsg('success', 'HR account successfully verified!');
     } catch (err) {
@@ -58,7 +58,7 @@ export default function HRManagement() {
     if (!rejectReason.trim()) return;
     try {
       // Assuming unverify logic for rejection in this demo
-      await axios.post(`${API_BASE}/unverify/${rejectModal.hrId}`, { reason: rejectReason });
+      await api.post(`${API_BASE}/unverify/${rejectModal.hrId}`, { reason: rejectReason });
       setHrs(hrs.map(hr => (hr.id === rejectModal.hrId ? { ...hr, verified: false } : hr)));
       showMsg('info', `Verification rejected. Reason: ${rejectReason}`);
       setRejectModal({ open: false, hrId: null });
@@ -181,7 +181,7 @@ export default function HRManagement() {
                       <td>
                         {hr.idProofPath ? (
                           <a
-                            href={`http://localhost:8081/api/hrs/file/${hr.idProofPath}`}
+                            href={`https://backend.virtuehire.in/api/hrs/file/${hr.idProofPath}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="hrm-proof-link"

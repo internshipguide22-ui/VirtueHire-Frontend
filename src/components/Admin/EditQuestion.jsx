@@ -25,7 +25,7 @@
 
 //   const fetchQuestion = async () => {
 //     try {
-//       const res = await axios.get(`http://localhost:8081/admin/questions/${id}`);
+//       const res = await axios.get(`https://backend.virtuehire.in/admin/questions/${id}`);
 //       setQuestion(res.data);
 //       setLoading(false);
 //     } catch (err) {
@@ -49,7 +49,7 @@
 //   const handleSubmit = async (e) => {
 //     e.preventDefault();
 //     try {
-//       await axios.post(`http://localhost:8081/admin/questions/update/${id}`, question);
+//       await axios.post(`https://backend.virtuehire.in/admin/questions/update/${id}`, question);
 //       setMessage("Question updated successfully!");
 //       setTimeout(() => navigate("/admin/questions"), 1500); // redirect after 1.5s
 //     } catch (err) {
@@ -192,7 +192,7 @@
 // src/pages/admin/EditQuestion.jsx
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../../services/api";
 
 const EditQuestion = () => {
   const { id } = useParams();
@@ -212,8 +212,8 @@ const EditQuestion = () => {
 
   // Fetch question by ID
   useEffect(() => {
-    axios
-      .get(`http://localhost:8081/api/admin/questions/${id}`, { withCredentials: true })
+    api
+      .get(`/admin/questions/${id}`)
       .then((res) => {
         const q = res.data;
         setQuestion({
@@ -245,8 +245,8 @@ const EditQuestion = () => {
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    axios
-      .put(`http://localhost:8081/api/admin/questions/update/${id}`, question, { withCredentials: true })
+    api
+      .put(`/admin/questions/update/${id}`, question)
       .then((res) => {
         setMessage("Question updated successfully!");
         setTimeout(() => navigate("/admin/questions"), 1500); // Redirect after success

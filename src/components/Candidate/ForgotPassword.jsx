@@ -12,7 +12,7 @@
 //     setError("");
 
 //     try {
-//       const response = await fetch("http://localhost:8081/api/candidates/forgot-password", {
+//       const response = await fetch("https://backend.virtuehire.in/api/candidates/forgot-password", {
 //         method: "POST",
 //         headers: { "Content-Type": "application/json" },
 //         body: JSON.stringify({ email }),
@@ -75,7 +75,7 @@
 //     setError("");
 
 //     try {
-//       const response = await fetch("http://localhost:8081/api/candidates/forgot-password", {
+//       const response = await fetch("https://backend.virtuehire.in/api/candidates/forgot-password", {
 //         method: "POST",
 //         headers: { "Content-Type": "application/json" },
 //         body: JSON.stringify({ email }),
@@ -128,6 +128,7 @@
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import api from "../../services/api";
 
 const styles = `
   .auth-container {
@@ -305,13 +306,9 @@ const ForgotPassword = () => {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:8081/api/candidates/forgot-password", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
+      const response = await api.post("/candidates/forgot-password", { email });
 
-      if (response.ok) {
+      if (response.status === 200) {
         setMessage("✅ Reset link sent to your email!");
         setTimeout(() => {
           navigate(`/reset-password?email=${encodeURIComponent(email)}`);
@@ -328,13 +325,13 @@ const ForgotPassword = () => {
     <>
       <style>{styles}</style>
       <div className="auth-container">
-        <button 
+        <button
           onClick={() => window.history.back()}
           className="auth-back-button"
         >
           ← Back
         </button>
-        
+
         <div className="auth-form-wrapper">
           <h1 className="auth-title">Forgot Password</h1>
           <p className="auth-subtitle">Enter your email to receive a reset link</p>

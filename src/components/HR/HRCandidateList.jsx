@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../../services/api';
 import { Search, Filter, Mail, GraduationCap, Briefcase, Award, Eye, Trash2, ArrowLeft, Download, User } from 'lucide-react';
 import './HRCandidateList.css';
 
@@ -17,7 +17,7 @@ export default function HRCandidateList() {
     minScore: ''
   });
 
-  const API_BASE = 'http://localhost:8081/api/hrs';
+  const API_BASE = '/hrs';
 
   useEffect(() => {
     // Basic authentication check
@@ -37,7 +37,7 @@ export default function HRCandidateList() {
   const fetchCandidates = async (searchParams = {}) => {
     setLoading(true);
     try {
-      const response = await axios.get(`${API_BASE}/candidates`, { params: searchParams });
+      const response = await api.get(`${API_BASE}/candidates`, { params: searchParams });
       // The backend returns a map with 'candidates' and 'hr'
       setCandidates(response.data.candidates || []);
       if (response.data.hr) setHrInfo(response.data.hr);

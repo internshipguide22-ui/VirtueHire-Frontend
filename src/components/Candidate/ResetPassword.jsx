@@ -31,7 +31,7 @@
 //     }
 
 //     try {
-//       const response = await fetch("http://localhost:8081/api/candidates/reset-password", {
+//       const response = await fetch("https://backend.virtuehire.in/api/candidates/reset-password", {
 //         method: "POST",
 //         headers: { "Content-Type": "application/json" },
 //         body: JSON.stringify({ email, newPassword: password }),
@@ -125,7 +125,7 @@
 //     }
 
 //     try {
-//       const response = await fetch("http://localhost:8081/api/candidates/reset-password", {
+//       const response = await fetch("https://backend.virtuehire.in/api/candidates/reset-password", {
 //         method: "POST",
 //         headers: { "Content-Type": "application/json" },
 //         body: JSON.stringify({ email, code, newPassword: password }), // 🔹 include code
@@ -229,7 +229,7 @@
 //     }
 
 //     try {
-//       const response = await fetch("http://localhost:8081/api/candidates/reset-password", {
+//       const response = await fetch("https://backend.virtuehire.in/api/candidates/reset-password", {
 //         method: "POST",
 //         headers: { "Content-Type": "application/json" },
 //         body: JSON.stringify({ email, code, newPassword: password }),
@@ -373,7 +373,7 @@
 //     }
 
 //     try {
-//       const response = await fetch("http://localhost:8081/api/candidates/reset-password", {
+//       const response = await fetch("https://backend.virtuehire.in/api/candidates/reset-password", {
 //         method: "POST",
 //         headers: { "Content-Type": "application/json" },
 //         body: JSON.stringify({ email, code, newPassword: password }),
@@ -485,6 +485,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import api from "../../services/api";
 
 const styles = `
   .auth-container {
@@ -685,13 +686,9 @@ const ResetPassword = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:8081/api/candidates/reset-password", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, code, newPassword: password }),
-      });
+      const response = await api.post("/candidates/reset-password", { email, code, newPassword: password });
 
-      if (response.ok) {
+      if (response.status === 200) {
         setMessage("✅ Password successfully updated!");
         setTimeout(() => navigate("/candidate-login"), 2000);
       } else {
@@ -707,7 +704,7 @@ const ResetPassword = () => {
     <>
       <style>{styles}</style>
       <div className="auth-container">
-        <button 
+        <button
           onClick={() => window.history.back()}
           className="auth-back-button"
         >

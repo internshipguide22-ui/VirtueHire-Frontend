@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { 
-  LayoutDashboard, 
-  Users, 
-  FileText, 
-  Settings, 
-  LogOut, 
-  CheckCircle, 
-  AlertCircle, 
-  Clock, 
+import api from '../../services/api';
+import {
+  LayoutDashboard,
+  Users,
+  FileText,
+  Settings,
+  LogOut,
+  CheckCircle,
+  AlertCircle,
+  Clock,
   Award
 } from 'lucide-react';
 import TestManager from './TestManager';
@@ -17,8 +17,6 @@ import LiveAssessments from './LiveAssessments';
 import LiveMonitoring from './LiveMonitoring';
 import './HRDashboard.css';
 import { Monitor } from 'lucide-react';
-
-const API_BASE = 'http://localhost:8081/api/hrs';
 
 const HRDashboard = () => {
   const navigate = useNavigate();
@@ -59,14 +57,14 @@ const HRDashboard = () => {
   const fetchInitialData = async () => {
     setLoading(true);
     try {
-      const dashboardRes = await axios.get(`${API_BASE}/dashboard`, { withCredentials: true });
+      const dashboardRes = await api.get('/hrs/dashboard');
       setHr(dashboardRes.data.hr);
-      
-      const candidatesRes = await axios.get(`${API_BASE}/candidates`, { withCredentials: true });
+
+      const candidatesRes = await api.get('/hrs/candidates');
       const allCandidates = candidatesRes.data.candidates || [];
       setCandidates(allCandidates);
 
-      const subjectsRes = await axios.get(`${API_BASE}/subjects`, { withCredentials: true });
+      const subjectsRes = await api.get('/hrs/subjects');
       setSubjects(subjectsRes.data.subjects || []);
 
       setStats({
@@ -89,7 +87,7 @@ const HRDashboard = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.post(`${API_BASE}/logout`, {}, { withCredentials: true });
+      await api.post('/hrs/logout');
       localStorage.clear();
       navigate('/hrs/login');
     } catch (err) {
@@ -113,9 +111,8 @@ const HRDashboard = () => {
     formData.append('testName', testName);
 
     try {
-      await axios.post(`${API_BASE}/questions/upload`, formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-        withCredentials: true
+      await api.post('/hrs/questions/upload', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
       });
       setSuccess(`Question bank for ${testName} uploaded successfully!`);
       setUploadFile(null);
@@ -142,7 +139,7 @@ const HRDashboard = () => {
     }));
 
     try {
-      await axios.post(`${API_BASE}/assessment/config`, payload, { withCredentials: true });
+      await api.post('/hrs/assessment/config', payload);
       setSuccess(`Configuration for ${configSubject} saved!`);
       setTimeout(() => setSuccess(null), 3000);
     } catch (err) {
@@ -164,15 +161,15 @@ const HRDashboard = () => {
         <div className="hr-sidebar-logo">
           Virtue<span>Hire</span>
         </div>
-        
+
         <ul className="hr-nav-list">
-          <li 
+          <li
             className={`hr-nav-item ${activeTab === 'overview' ? 'active' : ''}`}
             onClick={() => setActiveTab('overview')}
           >
             <LayoutDashboard size={20} /> Dashboard
           </li>
-          <li 
+          <li
             className={`hr-nav-item ${activeTab === 'candidates' ? 'active' : ''}`}
             onClick={() => {
               // We could navigate, but let's keep it SPA within the tab
@@ -181,13 +178,13 @@ const HRDashboard = () => {
           >
             <Users size={20} /> Candidates
           </li>
-          <li 
+          <li
             className={`hr-nav-item ${activeTab === 'manage' ? 'active' : ''}`}
             onClick={() => setActiveTab('manage')}
           >
             <Settings size={20} /> Manage Tests
           </li>
-          <li 
+          <li
             className={`hr-nav-item ${activeTab === 'monitoring' ? 'active' : ''}`}
             onClick={() => setActiveTab('monitoring')}
           >
@@ -222,21 +219,21 @@ const HRDashboard = () => {
           <div className="hr-overview-tab">
             <div className="hr-stats-grid">
               <div className="hr-stat-card">
-                <div className="hr-stat-icon" style={{background: '#eff6ff', color: '#1d4ed8'}}><Users size={24} /></div>
+                <div className="hr-stat-icon" style={{ background: '#eff6ff', color: '#1d4ed8' }}><Users size={24} /></div>
                 <div className="hr-stat-info">
                   <h3>Total Talent Pool</h3>
                   <p>{stats.totalCandidates}</p>
                 </div>
               </div>
               <div className="hr-stat-card">
-                <div className="hr-stat-icon" style={{background: '#f0fdf4', color: '#15803d'}}><CheckCircle size={24} /></div>
+                <div className="hr-stat-icon" style={{ background: '#f0fdf4', color: '#15803d' }}><CheckCircle size={24} /></div>
                 <div className="hr-stat-info">
                   <h3>Tests Completed</h3>
                   <p>{stats.assessmentsTaken}</p>
                 </div>
               </div>
               <div className="hr-stat-card">
-                <div className="hr-stat-icon" style={{background: '#fff7ed', color: '#c2410c'}}><Clock size={24} /></div>
+                <div className="hr-stat-icon" style={{ background: '#fff7ed', color: '#c2410c' }}><Clock size={24} /></div>
                 <div className="hr-stat-info">
                   <h3>Pending Review</h3>
                   <p>{stats.pendingApprovals}</p>
@@ -272,13 +269,13 @@ const HRDashboard = () => {
                               </div>
                             </td>
                             <td>
-                                {c.assessmentTaken ? 
-                                    <span className="hrm-badge verified">Tested</span> : 
-                                    <span className="hrm-badge pending">Not Attempted</span>
-                                }
+                              {c.assessmentTaken ?
+                                <span className="hrm-badge verified">Tested</span> :
+                                <span className="hrm-badge pending">Not Attempted</span>
+                              }
                             </td>
                             <td>
-                              <button className="hcl-btn-view" style={{padding: '6px 12px'}} onClick={() => navigate(`/hr/candidate/${c.id}`)}>
+                              <button className="hcl-btn-view" style={{ padding: '6px 12px' }} onClick={() => navigate(`/hr/candidate/${c.id}`)}>
                                 View
                               </button>
                             </td>
@@ -291,15 +288,15 @@ const HRDashboard = () => {
               </div>
               <div className="col-md-5">
                 <div className="hr-section-card">
-                    <div className="hr-section-header">
-                        <h2>Your Profile</h2>
-                    </div>
-                    <div className="hr-profile-details">
-                        <p><strong>Company:</strong> {hr?.companyName}</p>
-                        <p><strong>Job Title:</strong> {hr?.jobTitle}</p>
-                        <p><strong>Industry:</strong> {hr?.industry}</p>
-                        <p><strong>Location:</strong> {hr?.city}, {hr?.state}</p>
-                    </div>
+                  <div className="hr-section-header">
+                    <h2>Your Profile</h2>
+                  </div>
+                  <div className="hr-profile-details">
+                    <p><strong>Company:</strong> {hr?.companyName}</p>
+                    <p><strong>Job Title:</strong> {hr?.jobTitle}</p>
+                    <p><strong>Industry:</strong> {hr?.industry}</p>
+                    <p><strong>Location:</strong> {hr?.city}, {hr?.state}</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -307,57 +304,57 @@ const HRDashboard = () => {
         )}
 
         {activeTab === 'candidates' && (
-            <div className="hr-section-card">
-                <div className="hr-section-header">
-                    <h2>Talent Pool</h2>
-                </div>
-                <div className="hr-table-container">
-                    <table className="hr-data-table">
-                        <thead>
-                            <tr>
-                                <th>Candidate</th>
-                                <th>Experience</th>
-                                <th>Skills</th>
-                                <th>Badge</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {candidates.map(c => (
-                                <tr key={c.id}>
-                                    <td>
-                                        <div className="hrm-user-info">
-                                            <div className="hrm-name">{c.fullName}</div>
-                                        </div>
-                                    </td>
-                                    <td>{c.experience} Years</td>
-                                    <td>{c.skills || 'Not specified'}</td>
-                                    <td><span className="hr-plan-badge">{c.badge || 'Candidate'}</span></td>
-                                    <td>
-                                        <button className="hcl-btn-view" style={{padding: '6px 12px'}} onClick={() => navigate(`/hr/candidate/${c.id}`)}>
-                                            View Profile
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+          <div className="hr-section-card">
+            <div className="hr-section-header">
+              <h2>Talent Pool</h2>
             </div>
+            <div className="hr-table-container">
+              <table className="hr-data-table">
+                <thead>
+                  <tr>
+                    <th>Candidate</th>
+                    <th>Experience</th>
+                    <th>Skills</th>
+                    <th>Badge</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {candidates.map(c => (
+                    <tr key={c.id}>
+                      <td>
+                        <div className="hrm-user-info">
+                          <div className="hrm-name">{c.fullName}</div>
+                        </div>
+                      </td>
+                      <td>{c.experience} Years</td>
+                      <td>{c.skills || 'Not specified'}</td>
+                      <td><span className="hr-plan-badge">{c.badge || 'Candidate'}</span></td>
+                      <td>
+                        <button className="hcl-btn-view" style={{ padding: '6px 12px' }} onClick={() => navigate(`/hr/candidate/${c.id}`)}>
+                          View Profile
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         )}
 
 
         {activeTab === 'manage' && (
-            <div className="hr-manage-wrapper">
-               <TestManager hr={hr} onSuccess={setSuccess} onError={setError} />
-               <div style={{ marginTop: '30px' }}>
-                 <LiveAssessments hr={hr} refreshTrigger={success} />
-               </div>
+          <div className="hr-manage-wrapper">
+            <TestManager hr={hr} onSuccess={setSuccess} onError={setError} />
+            <div style={{ marginTop: '30px' }}>
+              <LiveAssessments hr={hr} refreshTrigger={success} />
             </div>
+          </div>
         )}
 
         {activeTab === 'monitoring' && (
-            <LiveMonitoring />
+          <LiveMonitoring />
         )}
       </main>
     </div>

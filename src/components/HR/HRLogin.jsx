@@ -1,6 +1,6 @@
 // HRLogin.jsx
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../../services/api";
 
 const HRLogin = () => {
   const [email, setEmail] = useState("");
@@ -14,7 +14,7 @@ const HRLogin = () => {
     setError("");
 
     try {
-      const res = await axios.post("http://localhost:8081/api/auth/login", {
+      const res = await api.post("/auth/login", {
         email,
         password,
         role: "HR"

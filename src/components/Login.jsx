@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { User, Lock, Mail, Shield, Users, UserCheck, Eye, EyeOff, ArrowLeft } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import api from '../services/api';
+import { Lock, Mail, Shield, Users, UserCheck, Eye, EyeOff, ArrowLeft } from 'lucide-react';
 import './Login.css';
 
 const Login = () => {
@@ -13,6 +13,18 @@ const Login = () => {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(() => {
+        const path = location.pathname.toLowerCase();
+        if (path.includes('hr')) {
+            setActiveTab('hr');
+        } else if (path.includes('admin')) {
+            setActiveTab('admin');
+        } else if (path.includes('candidate')) {
+            setActiveTab('candidate');
+        }
+    }, [location.pathname]);
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -22,24 +34,28 @@ const Login = () => {
 
         try {
             const role = activeTab.toUpperCase();
-            const res = await axios.post("http://localhost:8081/api/auth/login", {
+            const res = await api.post("/auth/login", {
                 email: email,
                 password: password,
                 role: role
-            }, { withCredentials: true });
+            });
 
             if (res.data.user || res.data.role) {
                 setSuccess(`${activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} Login successful!`);
-                
+
                 // Consistency in localStorage keys for existing dashboards
                 localStorage.setItem('user_role', activeTab);
-                
+                if (res.data.token) {
+                    localStorage.setItem('token', res.data.token);
+                }
+
                 if (activeTab === 'candidate') {
                     localStorage.setItem('candidate', JSON.stringify(res.data.user));
                     localStorage.setItem('currentUser', JSON.stringify(res.data.user));
                     setTimeout(() => navigate("/candidates/welcome"), 1000);
                 } else if (activeTab === 'hr') {
                     localStorage.setItem('current_hr_user', JSON.stringify(res.data.user));
+                    localStorage.setItem('user', JSON.stringify(res.data.user)); // For HRCandidateList.jsx compatibility
                     setTimeout(() => navigate("/hr/dashboard"), 1000);
                 } else if (activeTab === 'admin') {
                     localStorage.setItem('admin_user', JSON.stringify(res.data.user));
