@@ -10,6 +10,7 @@ import HomePage from './pages/HomePage';
 import AboutUs from './pages/AboutUs';
 import Features from './pages/Features';
 import Contact from './pages/Contact';
+import WhatsappButton from './components/WhatsappButton';
 
 
 
@@ -160,6 +161,7 @@ function LayoutWrapper({ children }) {
       {!shouldHideLayout && (
         <ScrollTop showScrollTop={showScrollTop} scrollToTop={scrollToTop} />
       )}
+      {!shouldHideLayout && <WhatsappButton />}
     </div>
   );
 }

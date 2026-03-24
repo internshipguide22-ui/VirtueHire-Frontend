@@ -92,7 +92,7 @@ const WhyChoose = () => {
                                     {benefit.icon}
                                 </div>
 
-                                <motion.div layout style={{ zIndex: 10, position: 'relative' }}>
+                                <motion.div layout style={{ zIndex: 10, position: 'relative', color: isActive ? 'white' : 'inherit' }}>
                                     {isActive ? (
                                         <AnimatePresence mode="wait">
                                             <motion.div
@@ -104,8 +104,8 @@ const WhyChoose = () => {
                                                 <h3 style={{ fontSize: '2.5rem', fontWeight: '800', color: 'white', marginBottom: '1rem', lineHeight: '1.2' }}>
                                                     {benefit.title}
                                                 </h3>
-                                                <p className="active-description" style={{ fontSize: '1.1rem', lineHeight: '1.6', maxWidth: '80%', marginBottom: '2rem' }}>
-                                                    {benefit.description}
+                                                <p style={{ fontSize: '1.1rem', lineHeight: '1.6', maxWidth: '80%', marginBottom: '2rem' }}>
+                                                    <span style={{ color: '#ffffff', display: 'block' }}>{benefit.description}</span>
                                                 </p>
                                                 <button style={{
                                                     background: 'white',
@@ -150,9 +150,6 @@ const WhyChoose = () => {
             </div>
 
             <style dangerouslySetInnerHTML={{__html: `
-                .active-description {
-                    color: #ffffff !important;
-                }
                 @media (max-width: 900px) {
                     .accordion-container {
                         flex-direction: column !important;
