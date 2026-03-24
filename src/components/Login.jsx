@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import api from '../services/api';
-import { Lock, Mail, Shield, Users, UserCheck, Eye, EyeOff, ArrowLeft } from 'lucide-react';
+import { Lock, Mail, Shield, Users, UserCheck, Eye, EyeOff, ArrowLeft, Sparkles, Zap, TrendingUp } from 'lucide-react';
 import './Login.css';
 
 const Login = () => {
@@ -86,18 +86,25 @@ const Login = () => {
                         <div className="vh-brand-section">
                             <h1 className="vh-brand-title">VirtueHire</h1>
                             <p className="vh-brand-subtitle">Empowering Talent, Enabling Success</p>
+                            
                             <div className="vh-brand-features">
                                 <div className="vh-feature-item">
-                                    <div className="vh-feature-icon">✓</div>
-                                    <p>AI-Powered Matching</p>
+                                    <div className="vh-feature-icon">
+                                        <Sparkles size={18} />
+                                    </div>
+                                    <span>AI-Powered Matching</span>
                                 </div>
                                 <div className="vh-feature-item">
-                                    <div className="vh-feature-icon">✓</div>
-                                    <p>Seamless Hiring Process</p>
+                                    <div className="vh-feature-icon">
+                                        <Zap size={18} />
+                                    </div>
+                                    <span>Seamless Hiring Process</span>
                                 </div>
                                 <div className="vh-feature-item">
-                                    <div className="vh-feature-icon">✓</div>
-                                    <p>Career Growth Analytics</p>
+                                    <div className="vh-feature-icon">
+                                        <TrendingUp size={18} />
+                                    </div>
+                                    <span>Career Growth Analytics</span>
                                 </div>
                             </div>
                         </div>
@@ -107,15 +114,18 @@ const Login = () => {
                         <div className="vh-form-container">
                             <div className="vh-form-header">
                                 <button type="button" className="vh-back-button" onClick={() => navigate('/landing')}>
-                                    <ArrowLeft size={18} />
+                                    <ArrowLeft size={16} />
                                     Back
                                 </button>
-                                <h2 className="vh-form-title">Welcome Back</h2>
+                                <div>
+                                    <h2 className="vh-form-title">Welcome Back</h2>
+                                    <p className="vh-form-subtitle">Sign in to your account</p>
+                                </div>
                             </div>
-                            <p className="vh-form-subtitle">Sign in to your account</p>
 
                             <div className="vh-role-tabs">
                                 <button
+                                    type="button"
                                     onClick={() => setActiveTab('candidate')}
                                     className={`vh-role-tab ${activeTab === 'candidate' ? 'active' : ''}`}
                                 >
@@ -123,6 +133,7 @@ const Login = () => {
                                     <span>Candidate</span>
                                 </button>
                                 <button
+                                    type="button"
                                     onClick={() => setActiveTab('hr')}
                                     className={`vh-role-tab ${activeTab === 'hr' ? 'active' : ''}`}
                                 >
@@ -130,6 +141,7 @@ const Login = () => {
                                     <span>HR</span>
                                 </button>
                                 <button
+                                    type="button"
                                     onClick={() => setActiveTab('admin')}
                                     className={`vh-role-tab ${activeTab === 'admin' ? 'active' : ''}`}
                                 >

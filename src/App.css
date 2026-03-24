@@ -22,7 +22,27 @@
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
-  color: var(--dark);
+  color: var(--dark) !important;
+}
+
+h1, h2, h3, h4, .section-title {
+  color: var(--dark) !important;
+}
+
+p, .section-subtitle, .stat-text {
+  color: var(--text-gray) !important;
+}
+
+/* Override for sections with dark/colored backgrounds */
+.stats h2, .stats p, .stats .stat-number, .stats .stat-text,
+.newsletter h2, .newsletter p,
+.cta-section h2, .cta-section p,
+.footer h3, .footer p, .footer a {
+  color: #ffffff !important;
+}
+
+.stat-number {
+  color: #ffffff !important;
 }
 
 .container {

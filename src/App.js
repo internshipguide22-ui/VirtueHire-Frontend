@@ -14,7 +14,7 @@ import Contact from './pages/Contact';
 
 
 // Candidate Pages
-import CandidateRegistration from "./components/NewComponents/candi/Candidatereg";
+import CandidateRegistration from "./components/Candidate/CandidateRegister";
 import CandidateProfile from "./components/NewComponents/candi/CandidateProfile";
 //import CandidateLogin from "./components/Candidate/CandidateLogin";
 import CandidateWelcome from "./components/Candidate/CandidateWelcome";

@@ -14,6 +14,7 @@ const Stats = () => {
             padding: "60px 0",
             width: "100%"
         }}>
+            
             <div style={{
                 textAlign: "center",
                 color: "#fff",
