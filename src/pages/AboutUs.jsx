@@ -1,5 +1,5 @@
-import React from 'react'
-import AboutHeader from '../components/about/AboutHeader'
+import React from 'react';
+import PageHero from '../components/PageHero'
 import AboutMission from '../components/about/AboutMission'
 import AboutTeam from '../components/about/AboutTeam'
 import AboutValues from '../components/about/AboutValues'
@@ -10,15 +10,21 @@ import AboutPartners from '../components/about/AboutPartners'
 
 const AboutUs = () => {
     return (
-        <div className="about-us-page">
-            <AboutHeader />
-            <AboutMission />
-            <AboutStats />
-            <AboutValues />
-            <AboutTimeline />
-            <AboutTeam />
-            <AboutPartners />
-            <AboutTestimonials />
+        <div className="about-us-page" style={{ background: 'var(--white)' }}>
+            <PageHero 
+                title="Our Story & Mission" 
+                subtitle="Empowering the future of recruitment through technology, transparency, and talent-first innovation."
+                breadcrumb="About Virtue Hire"
+            />
+            <div style={{ padding: '80px 0' }}>
+                <AboutMission />
+                <AboutStats />
+                <AboutValues />
+                <AboutTimeline />
+                <AboutTeam />
+                <AboutPartners />
+                <AboutTestimonials />
+            </div>
         </div>
     )
 }

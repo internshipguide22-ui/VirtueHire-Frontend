@@ -1,44 +1,64 @@
-import React from 'react'
+import React from 'react';
+import { Target, Eye, Handshake } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const AboutMission = () => {
+    const missions = [
+        {
+            icon: <Target size={32} />,
+            title: "Our Mission",
+            desc: "To democratize hiring by creating transparent, efficient, and fair recruitment processes that benefit both employers and job seekers.",
+            color: "var(--primary)"
+        },
+        {
+            icon: <Eye size={32} />,
+            title: "Our Vision",
+            desc: "A world where every individual finds meaningful work and every organization builds exceptional teams through intelligent matching.",
+            color: "var(--secondary)"
+        },
+        {
+            icon: <Handshake size={32} />,
+            title: "Our Promise",
+            desc: "We commit to maintaining the highest standards of integrity and innovation while continuously evolving to meet workforce needs.",
+            color: "var(--accent)"
+        }
+    ];
+
     return (
-        <section className="about-mission">
+        <section className="about-mission" style={{ padding: '60px 0' }}>
             <div className="container">
-                <div className="mission-grid">
-                    <div className="mission-card">
-                        <div className="mission-icon">
-                            <i className="fas fa-bullseye"></i>
-                        </div>
-                        <h3>Our Mission</h3>
-                        <p>
-                            To democratize hiring by creating transparent, efficient, and fair recruitment processes
-                            that benefit both employers and job seekers through cutting-edge technology and data-driven insights.
-                        </p>
-                    </div>
-                    <div className="mission-card">
-                        <div className="mission-icon">
-                            <i className="fas fa-eye"></i>
-                        </div>
-                        <h3>Our Vision</h3>
-                        <p>
-                            A world where every individual finds meaningful work and every organization builds
-                            exceptional teams through intelligent, bias-free matching and comprehensive skill assessment.
-                        </p>
-                    </div>
-                    <div className="mission-card">
-                        <div className="mission-icon">
-                            <i className="fas fa-handshake"></i>
-                        </div>
-                        <h3>Our Promise</h3>
-                        <p>
-                            We commit to maintaining the highest standards of integrity, innovation, and user experience
-                            while continuously evolving to meet the changing needs of the modern workforce.
-                        </p>
-                    </div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+                    {missions.map((m, i) => (
+                        <motion.div
+                            key={i}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: i * 0.1 }}
+                            style={{
+                                padding: '3rem 2rem',
+                                background: 'white',
+                                borderRadius: '24px',
+                                boxShadow: 'var(--shadow-md)',
+                                border: '1px solid var(--medium-gray)',
+                                textAlign: 'center'
+                            }}
+                        >
+                            <div style={{ 
+                                width: '70px', height: '70px', borderRadius: '20px', background: `${m.color}15`, 
+                                color: m.color, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                margin: '0 auto 2rem'
+                            }}>
+                                {m.icon}
+                            </div>
+                            <h3 style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--dark)', marginBottom: '1rem' }}>{m.title}</h3>
+                            <p style={{ color: 'var(--text-gray)', lineHeight: '1.6' }}>{m.desc}</p>
+                        </motion.div>
+                    ))}
                 </div>
             </div>
         </section>
-    )
+    );
 }
 
-export default AboutMission
+export default AboutMission;

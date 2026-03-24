@@ -1,102 +1,20 @@
-// import React, { useState } from 'react';
-// import { Link, useLocation } from 'react-router-dom';
-// import Login from "./Login";
-
-
-// const Header = () => {
-//     const [isMenuOpen, setIsMenuOpen] = useState(false);
-//     const [showLoginModal, setShowLoginModal] = useState(false);
-//     const location = useLocation();
-
-//     const toggleMenu = () => {
-//         setIsMenuOpen(!isMenuOpen);
-//     };
-
-//     const closeMenu = () => {
-//         setIsMenuOpen(false);
-//     };
-
-//     const toggleLoginModal = () => {
-//         setShowLoginModal(!showLoginModal);
-//         closeMenu(); // Close mobile menu when opening login
-//     };
-
-//     const scrollToSection = (sectionId) => {
-//         if (location.pathname === '/') {
-//             const target = document.getElementById(sectionId);
-//             if (target) {
-//                 target.scrollIntoView({
-//                     behavior: 'smooth',
-//                     block: 'start'
-//                 });
-//             }
-//         } else {
-//             window.location.href = `/#${sectionId}`;
-//         }
-//         closeMenu();
-//     };
-
-//     return (
-//         <>
-//             <header>
-//                 <nav className="container">
-//                     <div className="logo">
-//                         <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-//                             Virtue Hire
-//                         </Link>
-//                     </div>
-//                     <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
-//                         <li>
-//                             <Link to="/" onClick={closeMenu}>Home</Link>
-//                         </li>
-//                         <li>
-//                             <Link to="/about" onClick={closeMenu}>About</Link>
-//                         </li>
-//                         <li><Link to="/features" onClick={closeMenu}>Features</Link></li>
-//                         <li><Link to="/contact" onClick={closeMenu}>Contact</Link></li>
-//                     </ul>
-//                     {/* Updated Login Button */}
-//                     <button onClick={toggleLoginModal} className="login-btn">
-//                         <i className="fas fa-sign-in-alt"></i>
-//                         Login / Register
-//                     </button>
-//                     <button className="mobile-menu-btn" onClick={toggleMenu}>
-//                         <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
-//                     </button>
-//                 </nav>
-//             </header>
-
-//             {/* Login Modal */}
-//             {showLoginModal && (
-//                 <div className="modal-overlay" onClick={() => setShowLoginModal(false)}>
-//                     <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-//                         <button
-//                             className="close-button"
-//                             onClick={() => setShowLoginModal(false)}
-//                         >
-//                             <i className="fas fa-times"></i>
-//                         </button>
-//                         <Login onClose={() => setShowLoginModal(false)} />
-//                     </div>
-//                 </div>
-//             )}
-//         </>
-//     );
-// };
-
-// export default Header;
-
-
-
-// src/components/Header.jsx
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X, LogIn, LogOut } from 'lucide-react';
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
+
+    useEffect(() => {
+        const handleScroll = () => setScrolled(window.scrollY > 20);
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     useEffect(() => {
         const checkAuth = () => {
@@ -104,22 +22,20 @@ const Header = () => {
             const hr = localStorage.getItem("current_hr_user");
             const admin = localStorage.getItem("admin_logged_in");
             const currentUser = localStorage.getItem("currentUser");
-
             setIsLoggedIn(!!(candidate || hr || admin || currentUser));
         };
 
         checkAuth();
-        // Listen for storage changes in other tabs
         window.addEventListener('storage', checkAuth);
         return () => window.removeEventListener('storage', checkAuth);
-    }, [location.pathname]); // Re-check on route changes
+    }, [location.pathname]);
 
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
     const closeMenu = () => setIsMenuOpen(false);
 
     const goToLanding = () => {
-        navigate("/landing"); // Redirect to LandingPage
-        closeMenu(); // Close mobile menu
+        navigate("/landing");
+        closeMenu();
     };
 
     const handleLogout = () => {
@@ -129,55 +45,170 @@ const Header = () => {
         closeMenu();
     };
 
-    const scrollToSection = (sectionId) => {
-        if (location.pathname === '/') {
-            const target = document.getElementById(sectionId);
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        } else {
-            window.location.href = `/#${sectionId}`;
-        }
-        closeMenu();
-    };
+    const navLinks = [
+        { name: 'Home', path: '/' },
+        { name: 'About', path: '/about' },
+        { name: 'Features', path: '/features' },
+        { name: 'Contact', path: '/contact' }
+    ];
 
     return (
-        <header>
-            <nav className="container">
-                <div className="logo">
-                    <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+        <motion.header
+            initial={{ y: -100 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            style={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                right: 0,
+                zIndex: 1000,
+                transition: 'all 0.3s ease',
+                background: scrolled ? 'var(--glass-bg)' : 'transparent',
+                backdropFilter: scrolled ? 'var(--glass-blur)' : 'none',
+                boxShadow: scrolled ? 'var(--shadow-sm)' : 'none',
+                borderBottom: scrolled ? '1px solid var(--glass-border)' : '1px solid transparent',
+                padding: scrolled ? '0.8rem 0' : '1.2rem 0'
+            }}
+        >
+            <nav className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <motion.div 
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="logo"
+                >
+                    <Link to="/" style={{ textDecoration: 'none', color: 'var(--primary)', fontWeight: '800', fontSize: '1.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <div style={{ width: '32px', height: '32px', background: 'linear-gradient(135deg, var(--primary), var(--secondary))', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold' }}>V</div>
                         Virtue Hire
                     </Link>
-                </div>
+                </motion.div>
 
-                <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
-                    <li><Link to="/" onClick={closeMenu}>Home</Link></li>
-                    <li><Link to="/about" onClick={closeMenu}>About</Link></li>
-                    <li><Link to="/features" onClick={closeMenu}>Features</Link></li>
-                    <li><Link to="/contact" onClick={closeMenu}>Contact</Link></li>
+                {/* Desktop Nav */}
+                <ul style={{ 
+                    display: 'flex', 
+                    listStyle: 'none', 
+                    gap: '2.5rem',
+                    margin: 0,
+                    padding: 0
+                }} className="desktop-nav">
+                    {navLinks.map((link, idx) => (
+                        <motion.li key={idx} whileHover={{ y: -2 }}>
+                            <Link to={link.path} onClick={closeMenu} style={{ 
+                                textDecoration: 'none', 
+                                color: 'var(--text-gray)', 
+                                fontWeight: '500',
+                                fontSize: '1rem',
+                                transition: 'color 0.2s ease'
+                            }}
+                            onMouseOver={(e) => e.target.style.color = 'var(--primary)'}
+                            onMouseOut={(e) => e.target.style.color = 'var(--text-gray)'}
+                            >
+                                {link.name}
+                            </Link>
+                        </motion.li>
+                    ))}
                 </ul>
 
-                {/* Conditional rendering based on auth state */}
-                {isLoggedIn ? (
-                    <button onClick={handleLogout} className="login-btn">
-                        <i className="fas fa-sign-out-alt"></i>
-                        Logout
-                    </button>
-                ) : (
-                    <button onClick={goToLanding} className="login-btn">
-                        <i className="fas fa-sign-in-alt"></i>
-                        Login / Register
-                    </button>
-                )}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }} className="desktop-nav-auth">
+                    {isLoggedIn ? (
+                        <motion.button 
+                            whileHover={{ scale: 1.05, boxShadow: 'var(--shadow-md)' }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={handleLogout} style={{
+                                background: 'var(--white)',
+                                color: 'var(--text-gray)',
+                                border: '1px solid var(--medium-gray)',
+                                padding: '0.6rem 1.2rem',
+                                borderRadius: '8px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '8px',
+                                cursor: 'pointer',
+                                fontWeight: '600'
+                            }}>
+                            <LogOut size={18} />
+                            Logout
+                        </motion.button>
+                    ) : (
+                        <motion.button 
+                            whileHover={{ scale: 1.05, boxShadow: 'var(--shadow-md)' }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={goToLanding} style={{
+                                background: 'linear-gradient(135deg, var(--primary), var(--primary-light))',
+                                color: 'white',
+                                border: 'none',
+                                padding: '0.6rem 1.2rem',
+                                borderRadius: '8px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '8px',
+                                cursor: 'pointer',
+                                fontWeight: '600',
+                                boxShadow: 'var(--shadow)'
+                            }}>
+                            <LogIn size={18} />
+                            Login / Register
+                        </motion.button>
+                    )}
+                </div>
 
-                <button className="mobile-menu-btn" onClick={toggleMenu}>
-                    <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
+                <button 
+                    style={{ background: 'none', border: 'none', color: 'var(--dark)', cursor: 'pointer' }}
+                    className="mobile-menu-btn-custom" 
+                    onClick={toggleMenu}
+                >
+                    {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
                 </button>
             </nav>
-        </header>
+
+            {/* Mobile Nav Overlay */}
+            <AnimatePresence>
+                {isMenuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        style={{
+                            background: 'white',
+                            borderBottom: '1px solid var(--medium-gray)',
+                            overflow: 'hidden',
+                            boxShadow: 'var(--shadow-md)'
+                        }}
+                    >
+                        <div className="container" style={{ padding: '1rem 20px', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                            {navLinks.map((link, idx) => (
+                                <Link key={idx} to={link.path} onClick={closeMenu} style={{ 
+                                    textDecoration: 'none', 
+                                    color: 'var(--dark)', 
+                                    padding: '0.5rem 0',
+                                    fontWeight: '500',
+                                    borderBottom: '1px solid var(--medium-gray)'
+                                }}>
+                                    {link.name}
+                                </Link>
+                            ))}
+                            {isLoggedIn ? (
+                                <button onClick={handleLogout} style={{ border: 'none', background: 'transparent', color: 'var(--accent)', textAlign: 'left', padding: '0.5rem 0', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+                                    <LogOut size={18} /> Logout
+                                </button>
+                            ) : (
+                                <button onClick={goToLanding} style={{ border: 'none', background: 'transparent', color: 'var(--primary)', textAlign: 'left', padding: '0.5rem 0', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+                                    <LogIn size={18} /> Login / Register
+                                </button>
+                            )}
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+            <style dangerouslySetInnerHTML={{__html: `
+                @media (min-width: 969px) {
+                    .mobile-menu-btn-custom { display: none !important; }
+                }
+                @media (max-width: 968px) {
+                    .desktop-nav, .desktop-nav-auth { display: none !important; }
+                }
+            `}} />
+        </motion.header>
     );
 };
 

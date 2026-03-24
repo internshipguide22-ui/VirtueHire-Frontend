@@ -1,168 +1,102 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { Send, CheckCircle2, Building2, User, Mail, Phone, MessageSquare, Info } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const ContactForm = () => {
     const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        company: '',
-        phone: '',
-        subject: '',
-        message: '',
-        consent: false
+        name: '', email: '', company: '', phone: '', subject: '', message: '', consent: false
     })
-
     const [submitted, setSubmitted] = useState(false)
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target
-        setFormData({
-            ...formData,
-            [name]: type === 'checkbox' ? checked : value
-        })
+        setFormData({ ...formData, [name]: type === 'checkbox' ? checked : value })
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        // Handle form submission here
-        console.log('Form submitted:', formData)
         setSubmitted(true)
-
-        // Reset form after 3 seconds
         setTimeout(() => {
             setSubmitted(false)
-            setFormData({
-                name: '',
-                email: '',
-                company: '',
-                phone: '',
-                subject: '',
-                message: '',
-                consent: false
-            })
+            setFormData({ name: '', email: '', company: '', phone: '', subject: '', message: '', consent: false })
         }, 3000)
     }
 
     if (submitted) {
         return (
-            <div className="contact-form">
-                <div className="success-message">
-                    <i className="fas fa-check-circle"></i>
-                    <h2>Thank You!</h2>
-                    <p>We've received your message and will get back to you within 1 business day.</p>
+            <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                style={{
+                    padding: '4rem 2rem', background: 'white', borderRadius: '32px', textAlign: 'center',
+                    boxShadow: 'var(--shadow-lg)', border: '1px solid var(--medium-gray)'
+                }}
+            >
+                <div style={{ color: 'var(--primary)', marginBottom: '1.5rem', display: 'flex', justifyContent: 'center' }}>
+                    <CheckCircle2 size={64} />
                 </div>
-            </div>
+                <h2 style={{ fontSize: '2rem', fontWeight: '800', color: 'var(--dark)', marginBottom: '1rem' }}>Message Sent!</h2>
+                <p style={{ color: 'var(--text-gray)', fontSize: '1.1rem' }}>Thank you for reaching out. Our team will get back to you within 24 hours.</p>
+            </motion.div>
         )
     }
 
+    const inputStyle = {
+        width: '100%', padding: '1rem 1.2rem', borderRadius: '12px', border: '1px solid var(--medium-gray)',
+        fontSize: '1rem', outline: 'none', transition: 'all 0.3s ease', background: 'var(--light-gray)'
+    };
+
     return (
-        <div className="contact-form">
-            <h2>Send us a Message</h2>
-            <p className="form-description">
-                Fill out the form below and our team will get back to you as soon as possible.
-            </p>
-
-            <form onSubmit={handleSubmit}>
-                <div className="form-row">
-                    <div className="form-group">
-                        <label htmlFor="name">Full Name *</label>
-                        <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                            required
-                        />
+        <div style={{ padding: '3rem', background: 'white', borderRadius: '32px', boxShadow: 'var(--shadow-lg)', border: '1px solid var(--medium-gray)' }}>
+            <h2 style={{ fontSize: '2rem', fontWeight: '800', color: 'var(--dark)', marginBottom: '1.5rem', letterSpacing: '-1px' }}>Send us a Message</h2>
+            <form onSubmit={handleSubmit} style={{ display: 'grid', gap: '1.5rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+                    <div>
+                        <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600', color: 'var(--dark)', fontSize: '0.9rem' }}>Full Name *</label>
+                        <input type="text" name="name" value={formData.name} onChange={handleChange} required placeholder="John Doe" style={inputStyle} />
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="email">Email Address *</label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            required
-                        />
+                    <div>
+                        <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600', color: 'var(--dark)', fontSize: '0.9rem' }}>Email *</label>
+                        <input type="email" name="email" value={formData.email} onChange={handleChange} required placeholder="john@example.com" style={inputStyle} />
                     </div>
                 </div>
-
-                <div className="form-row">
-                    <div className="form-group">
-                        <label htmlFor="company">Company</label>
-                        <input
-                            type="text"
-                            id="company"
-                            name="company"
-                            value={formData.company}
-                            onChange={handleChange}
-                        />
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+                    <div>
+                        <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600', color: 'var(--dark)', fontSize: '0.9rem' }}>Company</label>
+                        <input type="text" name="company" value={formData.company} onChange={handleChange} placeholder="Company Name" style={inputStyle} />
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="phone">Phone Number</label>
-                        <input
-                            type="tel"
-                            id="phone"
-                            name="phone"
-                            value={formData.phone}
-                            onChange={handleChange}
-                        />
+                    <div>
+                        <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600', color: 'var(--dark)', fontSize: '0.9rem' }}>Phone</label>
+                        <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="+91 ..." style={inputStyle} />
                     </div>
                 </div>
-
-                <div className="form-group">
-                    <label htmlFor="subject">Subject *</label>
-                    <select
-                        id="subject"
-                        name="subject"
-                        value={formData.subject}
-                        onChange={handleChange}
-                        required
-                    >
+                <div>
+                    <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600', color: 'var(--dark)', fontSize: '0.9rem' }}>Subject *</label>
+                    <select name="subject" value={formData.subject} onChange={handleChange} required style={inputStyle}>
                         <option value="">Select a subject</option>
                         <option value="general">General Inquiry</option>
                         <option value="demo">Request a Demo</option>
                         <option value="pricing">Pricing Information</option>
                         <option value="support">Technical Support</option>
-                        <option value="partnership">Partnership Opportunity</option>
-                        <option value="careers">Careers</option>
                     </select>
                 </div>
-
-                <div className="form-group">
-                    <label htmlFor="message">Message *</label>
-                    <textarea
-                        id="message"
-                        name="message"
-                        rows="6"
-                        value={formData.message}
-                        onChange={handleChange}
-                        placeholder="Tell us about your recruitment challenges and how we can help..."
-                        required
-                    ></textarea>
+                <div>
+                    <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600', color: 'var(--dark)', fontSize: '0.9rem' }}>Message *</label>
+                    <textarea name="message" value={formData.message} onChange={handleChange} required rows="5" placeholder="How can we help you?" style={{ ...inputStyle, resize: 'none' }}></textarea>
                 </div>
-
-                <div className="form-group consent">
-                    <label className="checkbox-label">
-                        <input
-                            type="checkbox"
-                            name="consent"
-                            checked={formData.consent}
-                            onChange={handleChange}
-                            required
-                        />
-                        <span className="checkmark"></span>
-                        I agree to receive communications from Virtue Hire regarding my inquiry.
-                    </label>
-                </div>
-
-                <button type="submit" className="submit-btn">
-                    <i className="fas fa-paper-plane"></i>
-                    Send Message
+                <button type="submit" style={{
+                    padding: '1.2rem', background: 'var(--primary)', color: 'white', border: 'none', borderRadius: '12px',
+                    fontWeight: '700', fontSize: '1rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    gap: '10px', transition: 'all 0.3s ease'
+                }}
+                onMouseOver={(e) => e.currentTarget.style.background = 'var(--primary-dark)'}
+                onMouseOut={(e) => e.currentTarget.style.background = 'var(--primary)'}
+                >
+                    <Send size={18} /> Send Message
                 </button>
             </form>
         </div>
     )
 }
 
-export default ContactForm
+export default ContactForm;

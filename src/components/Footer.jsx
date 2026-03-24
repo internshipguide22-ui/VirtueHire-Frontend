@@ -1,320 +1,120 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import { Facebook, Twitter, Linkedin, Instagram, Youtube, MapPin, Phone, Mail, Clock, HeadphonesIcon } from 'lucide-react';
 
 const Footer = () => {
-    const footerStyles = {
-        footer: {
-            backgroundColor: '#2c3e50',
-            color: '#ecf0f1',
-            padding: '0',
-            marginTop: 'auto',
-        },
-        container: {
-            maxWidth: '1200px',
-            margin: '0 auto',
-            padding: '40px 20px 20px',
-        },
-        footerContent: {
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-            gap: '30px',
-            marginBottom: '30px',
-        },
-        footerSection: {
-            display: 'flex',
-            flexDirection: 'column',
-        },
-        companyTitle: {
-            color: '#3498db',
-            marginBottom: '15px',
-            fontSize: '1.5rem',
-            fontWeight: 'bold',
-        },
-        companyDescription: {
-            lineHeight: '1.6',
-            marginBottom: '20px',
-            color: '#bdc3c7',
-        },
-        socialLinks: {
-            display: 'flex',
-            gap: '15px',
-        },
-        socialIcon: {
-            display: 'inline-flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: '36px',
-            height: '36px',
-            backgroundColor: '#34495e',
-            borderRadius: '50%',
-            color: '#ecf0f1',
-            textDecoration: 'none',
-            transition: 'all 0.3s ease',
-        },
-        sectionTitle: {
-            color: '#3498db',
-            marginBottom: '20px',
-            fontSize: '1.2rem',
-            fontWeight: '600',
-        },
-        linksList: {
-            listStyle: 'none',
-            padding: '0',
-            margin: '0',
-        },
-        linkItem: {
-            marginBottom: '12px',
-        },
-        link: {
-            color: '#bdc3c7',
-            textDecoration: 'none',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '10px',
-            transition: 'color 0.3s ease',
-        },
-        icon: {
-            width: '16px',
-            color: '#3498db',
-        },
-        footerBottom: {
-            borderTop: '1px solid #34495e',
-            paddingTop: '20px',
-            textAlign: 'center',
-        },
-        copyright: {
-            color: '#95a5a6',
-            marginBottom: '10px',
-        },
-        policyLinks: {
-            display: 'flex',
-            justifyContent: 'center',
-            gap: '15px',
-            flexWrap: 'wrap',
-        },
-        policyLink: {
-            color: '#bdc3c7',
-            textDecoration: 'none',
-            fontSize: '0.9rem',
-        },
-    };
+    const footerLinks = [
+        { name: 'Home', path: '#home' },
+        { name: 'About', path: '#why-choose' },
+        { name: 'Features', path: '#features' },
+        { name: 'Contact', path: '#contact' }
+    ];
 
-    // Dynamic hover effects
-    const socialIconHover = {
-        backgroundColor: '#3498db',
-        transform: 'translateY(-2px)',
-    };
+    const socialLinks = [
+        { icon: <Linkedin size={18} />, url: "#" },
+        { icon: <Twitter size={18} />, url: "#" },
+        { icon: <Facebook size={18} />, url: "#" },
+        { icon: <Instagram size={18} />, url: "#" },
+        { icon: <Youtube size={18} />, url: "#" }
+    ];
 
-    const linkHover = {
-        color: '#3498db',
-    };
+    const policyLinks = [
+        "Privacy Policy", "Terms of Service", "Cookie Policy", "Security"
+    ];
 
     return (
-        <footer style={footerStyles.footer}>
-            <div style={footerStyles.container}>
-                <div style={footerStyles.footerContent}>
-                    {/* Company Information Section */}
-                    <div style={footerStyles.footerSection}>
-                        <h3 style={footerStyles.companyTitle}>Virtue Hire</h3>
-                        <p style={footerStyles.companyDescription}>
-                            "Connecting talent with opportunities through smart assessments and HR-driven recruitment solutions. Empower your hiring process today."
+        <footer style={{ background: 'var(--dark)', color: 'white', paddingTop: '80px', position: 'relative', overflow: 'hidden' }}>
+            {/* Soft top gradient */}
+            <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '4px', background: 'linear-gradient(90deg, var(--primary), var(--secondary), var(--accent))' }} />
+
+            <div className="container">
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '4rem', marginBottom: '4rem' }}>
+                    
+                    {/* Brand Section */}
+                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '1.5rem' }}>
+                            <div style={{ width: '36px', height: '36px', background: 'linear-gradient(135deg, var(--primary), var(--secondary))', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold', fontSize: '1.2rem' }}>V</div>
+                            <span style={{ fontSize: '1.8rem', fontWeight: '800', color: 'white', letterSpacing: '-0.5px' }}>Virtue Hire</span>
+                        </div>
+                        <p style={{ color: 'var(--text-light)', lineHeight: '1.7', marginBottom: '2rem', fontSize: '0.95rem' }}>
+                            Connecting talent with opportunities through smart assessments and AI-driven recruitment solutions. Empower your hiring process today and build the teams of tomorrow.
                         </p>
-                        <div style={footerStyles.socialLinks}>
-                            <a
-                                href="#"
-                                aria-label="LinkedIn"
-                                style={footerStyles.socialIcon}
-                                onMouseEnter={(e) => Object.assign(e.target.style, socialIconHover)}
-                                onMouseLeave={(e) => Object.assign(e.target.style, footerStyles.socialIcon)}
-                            >
-                                <i className="fab fa-linkedin-in"></i>
-                            </a>
-                            <a
-                                href="#"
-                                aria-label="Twitter"
-                                style={footerStyles.socialIcon}
-                                onMouseEnter={(e) => Object.assign(e.target.style, socialIconHover)}
-                                onMouseLeave={(e) => Object.assign(e.target.style, footerStyles.socialIcon)}
-                            >
-                                <i className="fab fa-twitter"></i>
-                            </a>
-                            <a
-                                href="#"
-                                aria-label="Facebook"
-                                style={footerStyles.socialIcon}
-                                onMouseEnter={(e) => Object.assign(e.target.style, socialIconHover)}
-                                onMouseLeave={(e) => Object.assign(e.target.style, footerStyles.socialIcon)}
-                            >
-                                <i className="fab fa-facebook-f"></i>
-                            </a>
-                            <a
-                                href="#"
-                                aria-label="Instagram"
-                                style={footerStyles.socialIcon}
-                                onMouseEnter={(e) => Object.assign(e.target.style, socialIconHover)}
-                                onMouseLeave={(e) => Object.assign(e.target.style, footerStyles.socialIcon)}
-                            >
-                                <i className="fab fa-instagram"></i>
-                            </a>
-                            <a
-                                href="#"
-                                aria-label="YouTube"
-                                style={footerStyles.socialIcon}
-                                onMouseEnter={(e) => Object.assign(e.target.style, socialIconHover)}
-                                onMouseLeave={(e) => Object.assign(e.target.style, footerStyles.socialIcon)}
-                            >
-                                <i className="fab fa-youtube"></i>
-                            </a>
+                        <div style={{ display: 'flex', gap: '12px' }}>
+                            {socialLinks.map((social, i) => (
+                                <motion.a 
+                                    key={i} 
+                                    href={social.url}
+                                    whileHover={{ y: -5, background: 'var(--primary)', color: 'white' }}
+                                    style={{ 
+                                        width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(255,255,255,0.05)', 
+                                        color: 'var(--text-light)', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                        transition: 'all 0.3s ease', textDecoration: 'none'
+                                    }}
+                                >
+                                    {social.icon}
+                                </motion.a>
+                            ))}
                         </div>
                     </div>
 
-                    {/* Quick Links Section */}
-                    <div style={footerStyles.footerSection}>
-                        <h3 style={footerStyles.sectionTitle}>Quick Links</h3>
-                        <ul style={footerStyles.linksList}>
-                            <li style={footerStyles.linkItem}>
-                                <a
-                                    href="#home"
-                                    style={footerStyles.link}
-                                    onMouseEnter={(e) => Object.assign(e.target.style, linkHover)}
-                                    onMouseLeave={(e) => Object.assign(e.target.style, { ...footerStyles.link, color: '#bdc3c7' })}
-                                >
-                                    Home
-                                </a>
-                            </li>
-                            <li style={footerStyles.linkItem}>
-                                <a
-                                    href="#why-choose"
-                                    style={footerStyles.link}
-                                    onMouseEnter={(e) => Object.assign(e.target.style, linkHover)}
-                                    onMouseLeave={(e) => Object.assign(e.target.style, { ...footerStyles.link, color: '#bdc3c7' })}
-                                >
-                                    About
-                                </a>
-                            </li>
-                            <li style={footerStyles.linkItem}>
-                                <a
-                                    href="#features"
-                                    style={footerStyles.link}
-                                    onMouseEnter={(e) => Object.assign(e.target.style, linkHover)}
-                                    onMouseLeave={(e) => Object.assign(e.target.style, { ...footerStyles.link, color: '#bdc3c7' })}
-                                >
-                                    Features
-                                </a>
-                            </li>
-                            <li style={footerStyles.linkItem}>
-                                <a
-                                    href="#contact"
-                                    style={footerStyles.link}
-                                    onMouseEnter={(e) => Object.assign(e.target.style, linkHover)}
-                                    onMouseLeave={(e) => Object.assign(e.target.style, { ...footerStyles.link, color: '#bdc3c7' })}
-                                >
-                                    Contact
-                                </a>
-                            </li>
+                    {/* Quick Links */}
+                    <div>
+                        <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '1.5rem', color: 'white' }}>Quick Links</h3>
+                        <ul style={{ listStyle: 'none', padding: 0 }}>
+                            {footerLinks.map((link, i) => (
+                                <li key={i} style={{ marginBottom: '12px' }}>
+                                    <motion.a 
+                                        href={link.path}
+                                        whileHover={{ x: 5, color: 'var(--primary-light)' }}
+                                        style={{ color: 'var(--text-light)', textDecoration: 'none', transition: 'color 0.2s', display: 'inline-block' }}
+                                    >
+                                        {link.name}
+                                    </motion.a>
+                                </li>
+                            ))}
                         </ul>
                     </div>
 
-                    {/* Contact Information Section */}
-                    <div style={footerStyles.footerSection}>
-                        <h3 style={footerStyles.sectionTitle}>Contact Us</h3>
-                        <ul style={footerStyles.linksList}>
-                            <li style={footerStyles.linkItem}>
-                                <a
-                                    href="#"
-                                    style={footerStyles.link}
-                                    onMouseEnter={(e) => Object.assign(e.target.style, linkHover)}
-                                    onMouseLeave={(e) => Object.assign(e.target.style, { ...footerStyles.link, color: '#bdc3c7' })}
-                                >
-                                    <i className="fas fa-map-marker-alt" style={footerStyles.icon}></i>
-                                    1/10, 7th street, Gandipuram, Coimbatore
-                                </a>
-                            </li>
-                            <li style={footerStyles.linkItem}>
-                                <a
-                                    href="tel:+919876543210"
-                                    style={footerStyles.link}
-                                    onMouseEnter={(e) => Object.assign(e.target.style, linkHover)}
-                                    onMouseLeave={(e) => Object.assign(e.target.style, { ...footerStyles.link, color: '#bdc3c7' })}
-                                >
-                                    <i className="fas fa-phone" style={footerStyles.icon}></i>
-                                    +91 9876543210
-                                </a>
-                            </li>
-                            <li style={footerStyles.linkItem}>
-                                <a
-                                    href="mailto:info@virtuehire.com"
-                                    style={footerStyles.link}
-                                    onMouseEnter={(e) => Object.assign(e.target.style, linkHover)}
-                                    onMouseLeave={(e) => Object.assign(e.target.style, { ...footerStyles.link, color: '#bdc3c7' })}
-                                >
-                                    <i className="fas fa-envelope" style={footerStyles.icon}></i>
-                                    info@virtuehire.com
-                                </a>
-                            </li>
-                            <li style={footerStyles.linkItem}>
-                                <a
-                                    href="#"
-                                    style={footerStyles.link}
-                                    onMouseEnter={(e) => Object.assign(e.target.style, linkHover)}
-                                    onMouseLeave={(e) => Object.assign(e.target.style, { ...footerStyles.link, color: '#bdc3c7' })}
-                                >
-                                    <i className="fas fa-clock" style={footerStyles.icon}></i>
-                                    Mon-Fri: 9AM-6PM
-                                </a>
-                            </li>
-                            <li style={footerStyles.linkItem}>
-                                <a
-                                    href="#"
-                                    style={footerStyles.link}
-                                    onMouseEnter={(e) => Object.assign(e.target.style, linkHover)}
-                                    onMouseLeave={(e) => Object.assign(e.target.style, { ...footerStyles.link, color: '#bdc3c7' })}
-                                >
-                                    <i className="fas fa-headset" style={footerStyles.icon}></i>
-                                    24/7 Support
-                                </a>
-                            </li>
+                    {/* Contact Info */}
+                    <div>
+                        <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '1.5rem', color: 'white' }}>Contact Us</h3>
+                        <ul style={{ listStyle: 'none', padding: 0 }}>
+                            {[
+                                { icon: <MapPin size={18} />, text: "1/10, 7th street, Gandipuram, Coimbatore" },
+                                { icon: <Phone size={18} />, text: "+91 9876543210" },
+                                { icon: <Mail size={18} />, text: "info@virtuehire.com" },
+                                { icon: <Clock size={18} />, text: "Mon-Fri: 9AM-6PM" },
+                                { icon: <HeadphonesIcon size={18} />, text: "24/7 Support" }
+                            ].map((item, i) => (
+                                <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', marginBottom: '16px', color: 'var(--text-light)', fontSize: '0.95rem', lineHeight: '1.5' }}>
+                                    <span style={{ color: 'var(--primary-light)', marginTop: '2px' }}>{item.icon}</span>
+                                    <span>{item.text}</span>
+                                </li>
+                            ))}
                         </ul>
                     </div>
+
                 </div>
 
-                {/* Footer Bottom Section */}
-                <div style={footerStyles.footerBottom}>
-                    <p style={footerStyles.copyright}>
-                        &copy; 2025 Virtue Hire. All Rights Reserved.
+                {/* Footer Bottom */}
+                <div style={{ 
+                    borderTop: '1px solid rgba(255,255,255,0.1)', 
+                    padding: '2rem 0', 
+                    display: 'flex', 
+                    justifyContent: 'space-between', 
+                    alignItems: 'center',
+                    flexWrap: 'wrap',
+                    gap: '1.5rem'
+                }}>
+                    <p style={{ color: 'var(--text-light)', fontSize: '0.9rem', margin: 0 }}>
+                        &copy; {new Date().getFullYear()} Virtue Hire. All Rights Reserved.
                     </p>
-                    <div style={footerStyles.policyLinks}>
-                        <a
-                            href="#"
-                            style={footerStyles.policyLink}
-                            onMouseEnter={(e) => Object.assign(e.target.style, linkHover)}
-                            onMouseLeave={(e) => Object.assign(e.target.style, { ...footerStyles.policyLink, color: '#bdc3c7' })}
-                        >
-                            Privacy Policy
-                        </a>
-                        <a
-                            href="#"
-                            style={footerStyles.policyLink}
-                            onMouseEnter={(e) => Object.assign(e.target.style, linkHover)}
-                            onMouseLeave={(e) => Object.assign(e.target.style, { ...footerStyles.policyLink, color: '#bdc3c7' })}
-                        >
-                            Terms of Service
-                        </a>
-                        <a
-                            href="#"
-                            style={footerStyles.policyLink}
-                            onMouseEnter={(e) => Object.assign(e.target.style, linkHover)}
-                            onMouseLeave={(e) => Object.assign(e.target.style, { ...footerStyles.policyLink, color: '#bdc3c7' })}
-                        >
-                            Cookie Policy
-                        </a>
-                        <a
-                            href="#"
-                            style={footerStyles.policyLink}
-                            onMouseEnter={(e) => Object.assign(e.target.style, linkHover)}
-                            onMouseLeave={(e) => Object.assign(e.target.style, { ...footerStyles.policyLink, color: '#bdc3c7' })}
-                        >
-                            Security
-                        </a>
+                    <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
+                        {policyLinks.map((link, i) => (
+                            <a key={i} href="#" style={{ color: 'var(--text-light)', textDecoration: 'none', fontSize: '0.9rem', transition: 'color 0.2s' }} onMouseOver={(e) => e.target.style.color = 'var(--primary-light)'} onMouseOut={(e) => e.target.style.color = 'var(--text-light)'}>
+                                {link}
+                            </a>
+                        ))}
                     </div>
                 </div>
             </div>

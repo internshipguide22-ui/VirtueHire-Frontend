@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -5,44 +7,44 @@
 }
 
 :root {
-  --primary: #4A5FC8;
-  --primary-dark: #3d50b5;
-  --primary-light: #6c7be8;
-  --secondary: #00BCD4;
-  --accent: #FF7043;
-  --dark: #2C3E50;
-  --light-gray: #F8F9FA;
-  --medium-gray: #E9ECEF;
-  --text-gray: #6C757D;
-  --white: #FFFFFF;
-  --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  --shadow-hover: 0 4px 20px rgba(0, 0, 0, 0.15);
+  /* Modern Indigo Theme */
+  --primary: #4f46e5;
+  --primary-dark: #3730a3;
+  --primary-light: #818cf8;
+  --secondary: #0ea5e9;
+  --accent: #f43f5e;
+  
+  --dark: #0f172a;
+  --dark-alt: #1e293b;
+  --light-gray: #f8fafc;
+  --medium-gray: #f1f5f9;
+  --text-gray: #475569;
+  --text-light: #94a3b8;
+  --white: #ffffff;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-hover: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  
+  /* Glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --glass-blur: blur(16px);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   line-height: 1.6;
-  color: var(--dark) !important;
-}
-
-h1, h2, h3, h4, .section-title {
-  color: var(--dark) !important;
-}
-
-p, .section-subtitle, .stat-text {
-  color: var(--text-gray) !important;
-}
-
-/* Override for sections with dark/colored backgrounds */
-.stats h2, .stats p, .stats .stat-number, .stats .stat-text,
-.newsletter h2, .newsletter p,
-.cta-section h2, .cta-section p,
-.footer h3, .footer p, .footer a {
-  color: #ffffff !important;
-}
-
-.stat-number {
-  color: #ffffff !important;
+  color: var(--dark);
+  background-color: var(--light-gray);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .container {

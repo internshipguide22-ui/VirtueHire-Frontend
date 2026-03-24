@@ -7,7 +7,6 @@ import Services from '../components/Services'
 import WhyChoose from '../components/WhyChoose'
 import SuccessStories from '../components/SuccessStories'
 import Testimonials from '../components/Testimonials'
-import Newsletter from '../components/Newsletter'
 import FAQ from '../components/FAQ'
 import CtaSection from '../components/CtaSection'
 
@@ -27,12 +26,10 @@ const HomePage = () => {
             <Hero scrollToSection={scrollToSection} />
             <Stats />
             <Process />
-            <Features />
             <Services />
             <WhyChoose />
             <SuccessStories />
             <Testimonials />
-            <Newsletter />
             <FAQ />
             <CtaSection scrollToSection={scrollToSection} />
         </>

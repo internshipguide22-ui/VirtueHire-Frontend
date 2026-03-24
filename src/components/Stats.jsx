@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const Stats = () => {
     const stats = [
@@ -8,82 +9,115 @@ const Stats = () => {
         { number: "30+", text: "Industries Served" }
     ];
 
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: { staggerChildren: 0.15 }
+        }
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 30 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+    };
+
     return (
         <section style={{
-            backgroundColor: "#4A5FC8",
-            padding: "60px 0",
-            width: "100%"
+            position: 'relative',
+            padding: "80px 0",
+            background: 'var(--white)',
+            overflow: 'hidden'
         }}>
-            
+            {/* Soft background glow */}
             <div style={{
-                textAlign: "center",
-                color: "#fff",
-                maxWidth: "1200px",
-                margin: "0 auto",
-                padding: "0 30px"
-            }}>
-                {/* Header Section */}
-                <div style={{ marginBottom: "50px" }}>
-                    <h2 style={{
-                        color: "#fff",
-                        marginBottom: "16px",
-                        fontSize: "36px",
-                        fontWeight: "700",
-                        lineHeight: "1.2"
-                    }}>
-                        Our Impact
-                    </h2>
-                    <p style={{
-                        color: "#fff",
-                        marginBottom: "0",
-                        fontSize: "18px",
-                        lineHeight: "1.5",
-                        maxWidth: "700px",
-                        marginLeft: "auto",
-                        marginRight: "auto",
-                        opacity: "0.9"
-                    }}>
-                        Join thousands of companies and candidates who have transformed their hiring process with Virtue Hire
-                    </p>
-                </div>
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: '100%',
+                height: '300px',
+                background: 'linear-gradient(90deg, rgba(79,70,229,0.05) 0%, rgba(14,165,233,0.05) 100%)',
+                filter: 'blur(60px)',
+                zIndex: 0,
+                borderRadius: '50%'
+            }} />
 
-                {/* Stats Grid */}
-                <div style={{
-                    display: "grid",
-                    gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-                    gap: "40px",
-                    alignItems: "start",
-                    justifyItems: "center"
-                }}>
-                    {stats.map((stat, index) => (
-                        <div key={index} style={{
-                            textAlign: "center",
-                            color: "#fff",
-                            padding: "20px 15px"
+            <div className="container" style={{ position: 'relative', zIndex: 10 }}>
+                <motion.div 
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    style={{
+                        background: 'rgba(255, 255, 255, 0.7)',
+                        backdropFilter: 'blur(20px)',
+                        borderRadius: '32px',
+                        border: '1px solid rgba(0, 0, 0, 0.05)',
+                        boxShadow: '0 20px 40px -10px rgba(0, 0, 0, 0.05)',
+                        padding: '4rem 2rem',
+                    }}
+                >
+                    <div style={{ textAlign: "center", marginBottom: "3rem" }}>
+                        <h2 style={{
+                            color: "var(--dark)",
+                            marginBottom: "1rem",
+                            fontSize: "2rem",
+                            fontWeight: "800",
+                            letterSpacing: '-0.5px'
                         }}>
-                            <div style={{
-                                fontSize: "42px",
-                                fontWeight: "bold",
-                                lineHeight: "1.1",
-                                marginBottom: "12px",
-                                letterSpacing: "0.5px"
-                            }}>
-                                {stat.number}
-                            </div>
-                            <div style={{
-                                fontSize: "16px",
-                                fontWeight: "500",
-                                lineHeight: "1.4",
-                                opacity: "0.9"
-                            }}>
-                                {stat.text}
-                            </div>
-                        </div>
-                    ))}
-                </div>
+                            Our <span style={{ color: 'var(--primary)' }}>Impact</span>
+                        </h2>
+                    </div>
 
-                {/* Additional Spacing at Bottom */}
-                <div style={{ marginTop: "30px" }}></div>
+                    <motion.div 
+                        variants={containerVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        style={{
+                            display: "flex",
+                            flexWrap: "wrap",
+                            justifyContent: "space-around",
+                            gap: "2rem",
+                        }}
+                    >
+                        {stats.map((stat, index) => (
+                            <motion.div 
+                                key={index} 
+                                variants={itemVariants}
+                                whileHover={{ scale: 1.05 }}
+                                style={{
+                                    textAlign: "center",
+                                    flex: '1 1 200px',
+                                    position: 'relative'
+                                }}
+                            >
+                                <div style={{
+                                    fontSize: "3.5rem",
+                                    fontWeight: "900",
+                                    marginBottom: "0.5rem",
+                                    background: index % 2 === 0 
+                                        ? 'linear-gradient(135deg, var(--primary) 0%, #818cf8 100%)'
+                                        : 'linear-gradient(135deg, var(--secondary) 0%, #38bdf8 100%)',
+                                    WebkitBackgroundClip: 'text',
+                                    WebkitTextFillColor: 'transparent',
+                                    dropShadow: '0 4px 6px rgba(0,0,0,0.1)'
+                                }}>
+                                    {stat.number}
+                                </div>
+                                <div style={{
+                                    fontSize: "0.95rem",
+                                    fontWeight: "600",
+                                    color: "var(--text-gray)",
+                                    letterSpacing: '0.5px'
+                                }}>
+                                    {stat.text}
+                                </div>
+                            </motion.div>
+                        ))}
+                    </motion.div>
+                </motion.div>
             </div>
         </section>
     );

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronDown } from 'lucide-react';
 
 const FAQ = () => {
     const [activeIndex, setActiveIndex] = useState(null);
@@ -22,28 +24,74 @@ const FAQ = () => {
         }
     ];
 
-    const toggleFAQ = (index) => {
-        setActiveIndex(activeIndex === index ? null : index);
-    };
-
     return (
-        <section className="faq">
+        <section id="faq" style={{ padding: '100px 0', background: 'var(--white)' }}>
             <div className="container">
-                <h2 className="section-title">Frequently Asked Questions</h2>
-                <p className="section-subtitle">Find answers to common questions about Virtue Hire</p>
-                <div className="faq-container">
+                <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    style={{ textAlign: 'center', maxWidth: '700px', margin: '0 auto 4rem' }}
+                >
+                    <h2 style={{ fontSize: '2.5rem', fontWeight: '800', color: 'var(--dark)', marginBottom: '1rem' }}>Frequently Asked <span style={{ color: 'var(--primary)' }}>Questions</span></h2>
+                    <p style={{ fontSize: '1.1rem', color: 'var(--text-gray)' }}>Find answers to common questions about Virtue Hire</p>
+                </motion.div>
+
+                <div style={{ maxWidth: '800px', margin: '0 auto' }}>
                     {faqs.map((faq, index) => (
-                        <div key={index} className="faq-item">
+                        <motion.div 
+                            key={index}
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: index * 0.1 }}
+                            style={{ 
+                                marginBottom: '1rem', 
+                                border: `1px solid ${activeIndex === index ? 'var(--primary-light)' : 'var(--medium-gray)'}`, 
+                                borderRadius: '16px',
+                                background: activeIndex === index ? 'var(--light-gray)' : 'white',
+                                overflow: 'hidden',
+                                transition: 'all 0.3s ease'
+                            }}
+                        >
                             <button
-                                className={`faq-question ${activeIndex === index ? 'active' : ''}`}
-                                onClick={() => toggleFAQ(index)}
+                                onClick={() => setActiveIndex(activeIndex === index ? null : index)}
+                                style={{
+                                    width: '100%',
+                                    padding: '1.5rem',
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center',
+                                    background: 'none',
+                                    border: 'none',
+                                    cursor: 'pointer',
+                                    color: activeIndex === index ? 'var(--primary)' : 'var(--dark)',
+                                    fontWeight: '600',
+                                    fontSize: '1.1rem',
+                                    textAlign: 'left',
+                                    transition: 'color 0.3s ease'
+                                }}
                             >
                                 {faq.question}
+                                <motion.div animate={{ rotate: activeIndex === index ? 180 : 0 }} transition={{ duration: 0.3 }}>
+                                    <ChevronDown size={20} />
+                                </motion.div>
                             </button>
-                            <div className={`faq-answer ${activeIndex === index ? 'active' : ''}`}>
-                                <p>{faq.answer}</p>
-                            </div>
-                        </div>
+                            <AnimatePresence>
+                                {activeIndex === index && (
+                                    <motion.div
+                                        initial={{ height: 0, opacity: 0 }}
+                                        animate={{ height: 'auto', opacity: 1 }}
+                                        exit={{ height: 0, opacity: 0 }}
+                                        transition={{ duration: 0.3, ease: 'easeInOut' }}
+                                    >
+                                        <div style={{ padding: '0 1.5rem 1.5rem', color: 'var(--text-gray)', lineHeight: '1.6' }}>
+                                            {faq.answer}
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </motion.div>
                     ))}
                 </div>
             </div>
