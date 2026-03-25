@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import api from "../../services/api";
+import { API_BASE_URL } from "../../config";
 
 const CandidateDetails = () => {
   const { id } = useParams();
@@ -202,7 +203,7 @@ const CandidateDetails = () => {
             <>
               <p><strong>Resume File:</strong> {candidate.resumePath}</p>
               <a
-                href={`https://backend.virtuehire.in/api/candidates/file/${candidate.resumePath}`}
+                href={`${API_BASE_URL}/candidates/file/${candidate.resumePath}`}
                 className="btn btn-sm btn-outline-primary"
               >
                 <i className="fas fa-download"></i> Download Resume

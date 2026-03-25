@@ -29,7 +29,7 @@ body {
 }
 
 /* ========== Timer Badge ========== */
-div[style*="position: fixed"] {
+.timer-badge-fixed {
   background-color: #ffffff !important;
   color: #ef4444 !important;
   padding: 12px 20px !important;
@@ -61,7 +61,7 @@ div[style*="position: fixed"] {
 }
 
 /* ========== Title ========== */
-h2 {
+.exam-title {
   background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -73,7 +73,7 @@ h2 {
 }
 
 /* Total Questions Info */
-p:first-of-type {
+.exam-subtitle {
   text-align: center !important;
   color: #6b7280 !important;
   font-weight: 500 !important;
@@ -82,7 +82,7 @@ p:first-of-type {
 }
 
 /* ========== Question Container ========== */
-div[style*="marginBottom: 22px"] {
+.exam-question-container {
   background-color: #f9fafb !important;
   padding: 24px !important;
   border-radius: 12px !important;
@@ -91,13 +91,13 @@ div[style*="marginBottom: 22px"] {
   transition: all 0.2s ease !important;
 }
 
-div[style*="marginBottom: 22px"]:hover {
+.exam-question-container:hover {
   background-color: #f3f4f6 !important;
   box-shadow: 0 4px 12px rgba(79, 70, 229, 0.1) !important;
 }
 
 /* Question Text */
-div[style*="marginBottom: 22px"] > p:first-child {
+.exam-question-text {
   font-size: 1.15rem !important;
   font-weight: 700 !important;
   color: #1f2937 !important;
@@ -106,7 +106,7 @@ div[style*="marginBottom: 22px"] > p:first-child {
 }
 
 /* ========== Options Container ========== */
-div[style*="display: flex"][style*="alignItems: center"][style*="padding: 8px"] {
+.exam-option-item {
   padding: 14px 16px !important;
   margin-bottom: 12px !important;
   border: 1.5px solid #e5e7eb !important;
@@ -116,14 +116,14 @@ div[style*="display: flex"][style*="alignItems: center"][style*="padding: 8px"] 
   cursor: pointer !important;
 }
 
-div[style*="display: flex"][style*="alignItems: center"][style*="padding: 8px"]:hover {
+.exam-option-item:hover {
   border-color: #4f46e5 !important;
   background-color: #f0f9ff !important;
   box-shadow: 0 2px 8px rgba(79, 70, 229, 0.1) !important;
 }
 
 /* Radio Button ========== */
-div[style*="width: 18px"][style*="height: 18px"] {
+.exam-radio-indicator {
   width: 22px !important;
   height: 22px !important;
   border-radius: 50% !important;
@@ -137,13 +137,13 @@ div[style*="width: 18px"][style*="height: 18px"] {
   flex-shrink: 0;
 }
 
-div[style*="backgroundColor: isSelected"] {
+.exam-radio-indicator.selected {
   background-color: #4f46e5 !important;
   box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3) !important;
 }
 
 /* Inner dot */
-div[style*="width: 6px"][style*="height: 6px"] {
+.exam-radio-dot {
   width: 8px !important;
   height: 8px !important;
   background-color: #ffffff !important;
@@ -151,14 +151,14 @@ div[style*="width: 6px"][style*="height: 6px"] {
 }
 
 /* ========== Option Text ========== */
-span[style*="fontSize: 15px"] {
+.exam-option-text {
   font-size: 1rem !important;
   color: #1f2937 !important;
   font-weight: 500 !important;
 }
 
 /* Correct Answer Badge */
-span[style*="color: green"] {
+.exam-badge-success {
   color: #10b981 !important;
   font-weight: 700 !important;
   background-color: #dcfce7 !important;
@@ -169,7 +169,7 @@ span[style*="color: green"] {
 }
 
 /* Wrong Answer Badge */
-span[style*="color: red"] {
+.exam-badge-error {
   color: #dc2626 !important;
   font-weight: 700 !important;
   background-color: #fee2e2 !important;
@@ -180,7 +180,7 @@ span[style*="color: red"] {
 }
 
 /* ========== Buttons ========== */
-button {
+.exam-nav-btn {
   background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%) !important;
   color: #ffffff !important;
   border: none !important;
@@ -190,19 +190,19 @@ button {
   border-radius: 10px !important;
   cursor: pointer !important;
   transition: all 0.3s ease !important;
-  display: inline-block !important; /* Changed from block to inline-block for side-by-side */
+  display: inline-block !important;
   margin: 10px !important;
   box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3) !important;
   text-transform: none !important;
 }
 
-button:hover:not(:disabled) {
+.exam-nav-btn:hover:not(:disabled) {
   background: linear-gradient(135deg, #4338ca 0%, #6d28d9 100%) !important;
   box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4) !important;
   transform: translateY(-2px) !important;
 }
 
-button:disabled {
+.exam-nav-btn:disabled {
   background: #e2e8f0 !important;
   color: #94a3b8 !important;
   box-shadow: none !important;
@@ -210,18 +210,18 @@ button:disabled {
 }
 
 /* Next Level Button */
-button[style*="backgroundColor: #4CAF50"] {
+.exam-nav-btn-alt {
   background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
   box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3) !important;
 }
 
-button[style*="backgroundColor: #4CAF50"]:hover {
+.exam-nav-btn-alt:hover {
   background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
   box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4) !important;
 }
 
 /* ========== Error Messages ========== */
-p[style*="color: red"] {
+.exam-error-box {
   background-color: #fee2e2 !important;
   color: #991b1b !important;
   padding: 16px !important;
@@ -232,7 +232,7 @@ p[style*="color: red"] {
 }
 
 /* Locked Message */
-p[style*="color: #f44336"] {
+.exam-locked-box {
   background-color: #fee2e2 !important;
   color: #991b1b !important;
   padding: 20px !important;
@@ -295,7 +295,7 @@ p[style*="color: #f44336"] {
     font-size: 0.95rem !important;
   }
 
-  div[style*="position: fixed"] {
+  .timer-badge-fixed {
     top: 100px !important;
     right: 20px !important;
     padding: 8px 14px !important;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
+import { WS_BASE_URL } from '../../config';
 
 const PendingCandidates = () => {
   const [candidates, setCandidates] = useState([]);
@@ -85,7 +86,7 @@ const PendingCandidates = () => {
                     <td>
                       {candidate.idCardPath ? (
                         <a
-                          href={`https://backend.virtuehire.in/candidates/file/${candidate.idCardPath}`}
+                          href={`${WS_BASE_URL}/candidates/file/${candidate.idCardPath}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="btn btn-sm btn-outline-primary"

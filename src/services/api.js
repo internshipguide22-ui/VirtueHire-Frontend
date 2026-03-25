@@ -1,8 +1,8 @@
-// src/services/api.js
-import axios from "axios";
+import axios from 'axios';
+import { API_BASE_URL } from "../config";
 
 const api = axios.create({
-  baseURL: "https://backend.virtuehire.in/api",  // Production backend URL
+  baseURL: API_BASE_URL,
   withCredentials: true, 
 });
 

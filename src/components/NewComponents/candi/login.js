@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { User, Mail, Lock, Eye, EyeOff } from "lucide-react";
+import { API_BASE_URL } from "../../../config";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -28,7 +29,7 @@ function Login() {
       formData.append("email", email);
       formData.append("password", password);
 
-      const res = await fetch("https://backend.virtuehire.in/candidates/login", {
+      const res = await fetch(`${API_BASE_URL}/candidates/login`, {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: formData

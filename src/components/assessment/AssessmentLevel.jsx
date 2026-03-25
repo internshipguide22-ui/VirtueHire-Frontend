@@ -384,8 +384,8 @@ const AssessmentLevel = () => {
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: "2rem" }}>
           <div>
-            <h5 style={{ margin: 0, fontWeight: "800", color: "#1e293b" }}>{subject}</h5>
-            <span style={{ fontSize: "0.85rem", color: "#64748b" }}>{sectionMetadata.name}</span>
+            <h5 className="exam-title" style={{ margin: 0, fontWeight: "800", color: "#1e293b" }}>{subject}</h5>
+            <span className="exam-subtitle" style={{ fontSize: "0.85rem", color: "#64748b" }}>{sectionMetadata.name}</span>
           </div>
           <div style={{
             display: "flex",
@@ -402,22 +402,12 @@ const AssessmentLevel = () => {
           </div>
         </div>
         {!isLocked && (
-          <div style={{
-            backgroundColor: timeLeft < 60 ? "#fee2e2" : "#f1f5f9",
-            color: timeLeft < 60 ? "#ef4444" : "#475569",
-            padding: "8px 16px",
-            borderRadius: "8px",
-            fontWeight: "700",
-            fontSize: "1.1rem",
-            display: "flex",
-            alignItems: "center",
-            gap: "8px"
-          }}>
+          <div className="timer-badge-fixed">
             <i className="far fa-clock"></i> {formatTime(timeLeft)}
           </div>
         )}
         <button
-          className="btn btn-primary btn-sm fw-bold"
+          className="exam-nav-btn btn btn-sm fw-bold"
           onClick={() => handleSubmit()}
           disabled={submitted || isLocked}
         >
@@ -482,40 +472,41 @@ const AssessmentLevel = () => {
         {/* Question Area */}
         <div style={{ flex: 1, minWidth: 0 }}>
           {error ? (
-            <div className="alert alert-danger shadow-sm">{error}</div>
+            <div className="exam-error-box alert alert-danger shadow-sm">{error}</div>
           ) : currentQuestion ? (
-            <div style={{
-              backgroundColor: "#fff",
-              borderRadius: "16px",
-              padding: "2.5rem",
-              boxShadow: "0 4px 15px rgba(0,0,0,0.03)",
-              minHeight: "400px",
-              display: "flex",
-              flexDirection: "column",
-              boxSizing: "border-box"
-            }}>
-              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "1.5rem" }}>
-                <span style={{
-                  color: "#4f46e5",
-                  fontWeight: "700",
-                  backgroundColor: "#eef2ff",
-                  padding: "4px 12px",
-                  borderRadius: "20px",
-                  fontSize: "0.85rem"
-                }}>
-                  Question {currentQuestionIndex + 1} of {questions.length}
-                </span>
-              </div>
+              <div className="exam-question-container" style={{
+                backgroundColor: "#fff",
+                borderRadius: "16px",
+                padding: "2.5rem",
+                boxShadow: "0 4px 15px rgba(0,0,0,0.03)",
+                minHeight: "400px",
+                display: "flex",
+                flexDirection: "column",
+                boxSizing: "border-box"
+              }}>
+                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "1.5rem" }}>
+                  <span style={{
+                    color: "#4f46e5",
+                    fontWeight: "700",
+                    backgroundColor: "#eef2ff",
+                    padding: "4px 12px",
+                    borderRadius: "20px",
+                    fontSize: "0.85rem"
+                  }}>
+                    Question {currentQuestionIndex + 1} of {questions.length}
+                  </span>
+                </div>
 
-              <h4 style={{ fontWeight: "700", color: "#1e293b", lineHeight: "1.5", marginBottom: "2rem" }}>
-                {currentQuestion.text}
-              </h4>
+                <h4 className="exam-question-text" style={{ fontWeight: "700", color: "#1e293b", lineHeight: "1.5", marginBottom: "2rem" }}>
+                  {currentQuestion.text}
+                </h4>
 
               <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "12px", marginBottom: "2rem" }}>
                 {(currentQuestion.options || []).map((opt, i) => (
                   <div
                     key={i}
                     onClick={() => handleSelect(currentQuestion.id, opt)}
+                    className="exam-option-item"
                     style={{
                       padding: "1rem 1.5rem",
                       borderRadius: "12px",
@@ -528,7 +519,7 @@ const AssessmentLevel = () => {
                       transition: "all 0.2s"
                     }}
                   >
-                    <div style={{
+                    <div className={`exam-radio-indicator ${answers[currentQuestion.id] === opt ? 'selected' : ''}`} style={{
                       width: "20px",
                       height: "20px",
                       borderRadius: "50%",
@@ -539,16 +530,16 @@ const AssessmentLevel = () => {
                       justifyContent: "center",
                       backgroundColor: answers[currentQuestion.id] === opt ? "#4f46e5" : "transparent"
                     }}>
-                      {answers[currentQuestion.id] === opt && <div style={{ width: "8px", height: "8px", borderRadius: "50%", backgroundColor: "#fff" }} />}
+                      {answers[currentQuestion.id] === opt && <div className="exam-radio-dot" style={{ width: "8px", height: "8px", borderRadius: "50%", backgroundColor: "#fff" }} />}
                     </div>
-                    <span style={{ fontWeight: "500", color: "#334155" }}>{opt}</span>
+                    <span className="exam-option-text" style={{ fontWeight: "500", color: "#334155" }}>{opt}</span>
                   </div>
                 ))}
               </div>
 
               <div style={{ marginTop: "auto", display: "flex", justifyContent: "space-between" }}>
                 <button
-                  className="btn btn-outline-secondary px-4 fw-bold"
+                  className="exam-nav-btn btn btn-outline-secondary px-4 fw-bold"
                   disabled={currentQuestionIndex === 0}
                   onClick={() => setCurrentQuestionIndex(prev => prev - 1)}
                 >
@@ -556,14 +547,14 @@ const AssessmentLevel = () => {
                 </button>
                 {currentQuestionIndex < questions.length - 1 ? (
                   <button
-                    className="btn btn-primary px-4 fw-bold"
+                    className="exam-nav-btn btn btn-primary px-4 fw-bold"
                     onClick={() => setCurrentQuestionIndex(prev => prev + 1)}
                   >
                     Next Question
                   </button>
                 ) : (
                   <button
-                    className="btn btn-success px-4 fw-bold"
+                    className="exam-nav-btn btn btn-success px-4 fw-bold"
                     onClick={() => handleSubmit()}
                     disabled={submitted}
                   >

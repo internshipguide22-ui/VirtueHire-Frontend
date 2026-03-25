@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../services/api';
+import { API_BASE_URL } from '../../config';
 import {
   Users,
   Search,
@@ -247,7 +248,7 @@ export default function CandidatesList() {
                           </Link>
                           {c.resumePath && (
                             <a
-                              href={`https://backend.virtuehire.in/api/admin/download/resume/${c.id}`}
+                              href={`${API_BASE_URL}/admin/download/resume/${c.id}`}
                               className="adm-t-btn secondary"
                               title="Download Resume"
                               download

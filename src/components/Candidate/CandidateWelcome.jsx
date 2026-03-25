@@ -3237,6 +3237,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
+import { API_BASE_URL } from "../../config";
 import "../NewComponents/candi/CandidateProfile.css";
 
 export default function CandidateWelcome() {
@@ -3278,7 +3279,7 @@ export default function CandidateWelcome() {
     setCandidate(parsedCandidate);
 
     if (parsedCandidate.profilePic) {
-      setProfileSrc(`https://backend.virtuehire.in/api/candidates/file/${parsedCandidate.profilePic}`);
+      setProfileSrc(`${API_BASE_URL}/candidates/file/${parsedCandidate.profilePic}`);
     }
 
     fetchCumulativeResults(parsedCandidate.id);

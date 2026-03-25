@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import api from '../../services/api';
 import { Eye, EyeOff, Check, X, User, Shield, Building2, Mail, ExternalLink, RefreshCw } from 'lucide-react';
-import './HRManagement.css'; // I'll create this to house specific styles
+import './HRManagement.css';
+import { API_BASE_URL } from '../../config';
 
 export default function HRManagement() {
   const location = useLocation();
@@ -181,7 +182,7 @@ export default function HRManagement() {
                       <td>
                         {hr.idProofPath ? (
                           <a
-                            href={`https://backend.virtuehire.in/api/hrs/file/${hr.idProofPath}`}
+                            href={`${API_BASE_URL}/hrs/file/${hr.idProofPath}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="hrm-proof-link"

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Shield, AlertCircle, Clock, CheckCircle, Activity, User } from 'lucide-react';
-import api from '../../services/api';
+import { WS_BASE_URL, API_BASE_URL } from '../../config';
 import { Client } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 import './LiveMonitoring.css';
@@ -12,8 +12,8 @@ const LiveMonitoring = () => {
 
     useEffect(() => {
         const client = new Client({
-            brokerURL: 'wss://backend.virtuehire.in/ws-assessment', 
-            webSocketFactory: () => new SockJS('https://backend.virtuehire.in/ws-assessment'),
+            brokerURL: WS_BASE_URL.replace('http', 'ws') + '/ws-assessment', 
+            webSocketFactory: () => new SockJS(WS_BASE_URL + '/ws-assessment'),
             onConnect: () => {
                 setConnected(true);
                 client.subscribe('/topic/exam-monitoring', (message) => {
